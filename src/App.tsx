@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import ResetStyle from './style/ResetStyle';
+import ResetStyle from './styles/ResetStyle';
+import './styles/tailwind.css';
 
 export default function App() {
   return (
