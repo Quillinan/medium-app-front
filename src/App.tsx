@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import ResetStyle from './styles/ResetStyle';
 import './styles/tailwind.css';
+import HomePage from './pages/HomePage';
 
 export default function App() {
   return (
@@ -9,7 +10,8 @@ export default function App() {
       <ResetStyle />
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LoginPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/' element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </>
