@@ -1,23 +1,22 @@
 import { useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+  const { removeAuth } = useAuth();
+  const auth = sessionStorage.getItem('isAuthenticated');
   const navigate = useNavigate();
 
-  const handleLogout = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    localStorage.setItem('auth', 'false');
+  const logout = () => {
+    removeAuth();
     navigate('/login');
   };
 
   useEffect(() => {
-    const auth = localStorage.getItem('auth');
-
-    if (auth !== 'true') {
-      navigate('/login');
+    if (!auth) {
+      logout();
     }
-  }, [navigate]);
+  }, [auth, logout]);
 
   return (
     <div className='min-h-full'>
@@ -103,7 +102,7 @@ const HomePage: React.FC = () => {
                       aria-haspopup='true'
                     >
                       <span
-                        onClick={handleLogout}
+                        onClick={logout}
                         className='absolute -inset-1.5'
                       ></span>
                       <span className='sr-only'>Open user menu</span>

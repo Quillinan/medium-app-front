@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const auth = sessionStorage.getItem('isAuthenticated');
+
+  const login = (auth: string | null) => {
+    console.log(auth);
+    if (auth) {
+      setError('');
+      navigate('/home');
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,13 +25,16 @@ const LoginForm: React.FC = () => {
     const validPassword = '1234';
 
     if (email === validEmail && password === validPassword) {
-      setError('');
-      localStorage.setItem('auth', 'true');
-      navigate('/');
+      setAuth();
+      login('true');
     } else {
       setError('Usuário ou senha incorretos');
     }
   };
+
+  useEffect(() => {
+    login(auth);
+  }, [auth, login]);
 
   return (
     <form action='#' method='POST' onSubmit={handleLogin} className='space-y-6'>
