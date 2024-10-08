@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 import ResetStyle from './styles/ResetStyle';
 import './styles/tailwind.css';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home/HomePage';
 
 export default function App() {
   return (

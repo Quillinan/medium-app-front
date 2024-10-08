@@ -1,5 +1,5 @@
-import LoginForm from '../components/LoginForm';
-import SocialLoginButtons from '../components/SocialLoginButtons';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import SocialLoginButtons from '../../components/SocialLoginButtons/SocialLoginButtons';
 
 const LoginPage: React.FC = () => {
   return (
