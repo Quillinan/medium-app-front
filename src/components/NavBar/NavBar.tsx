@@ -4,7 +4,7 @@ const NavBar: React.FC<{
   currentTab: string;
   onTabChange: (tab: string) => void;
 }> = ({ currentTab, onTabChange }) => {
-  const tabs = ['Dashboard', 'Team', 'Projects', 'Calendar', 'Reports'];
+  const tabs = ['Menu', 'Dashboard', 'Calendar'];
 
   return (
     <nav className='bg-gray-800'>

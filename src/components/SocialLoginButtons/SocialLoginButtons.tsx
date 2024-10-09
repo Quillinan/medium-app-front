@@ -12,7 +12,7 @@ const SocialLoginButtons: React.FC = () => {
         scopes: ['user.read'],
       })
       .then(response => {
-        const token = response.accessToken;
+        const token = response.uniqueId;
         if (token) {
           setAuth(token);
           console.log('Autenticado com sucesso', response);
@@ -22,7 +22,6 @@ const SocialLoginButtons: React.FC = () => {
         console.error('Erro de autenticação:', error);
       });
   };
-
   return (
     <div className='flex flex-col items-center space-y-4'>
       <button

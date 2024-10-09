@@ -3,7 +3,7 @@ import { MsalProvider } from '@azure/msal-react';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
 interface AuthContextType {
-  setAuth: (token: string | null) => void;
+  setAuth: (authToken: string | null) => void;
   removeAuth: () => void;
   token: string | null;
 }
@@ -32,8 +32,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(null);
 
   const setAuth = (authToken: string | null) => {
-    sessionStorage.setItem('isAuthenticated', 'true');
-    sessionStorage.setItem('authToken', authToken || '');
+    if (authToken) {
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('authToken', authToken);
+    } else {
+      sessionStorage.removeItem('isAuthenticated');
+      sessionStorage.removeItem('authToken');
+    }
     setToken(authToken);
   };
 

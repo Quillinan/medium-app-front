@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import NavBar from '../../components/NavBar/NavBar';
 import Header from '../../components/Header/Header';
-import MainContent from '../../components/MainContent/MainContent';
+import MainContent from '../../components/Content/MainContent/MainContent';
 
 const HomePage: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState('Dashboard');
-  const auth = sessionStorage.getItem('isAuthenticated');
-  const navigate = useNavigate();
   const { removeAuth } = useAuth();
+  const navigate = useNavigate();
+  const auth = sessionStorage.getItem('isAuthenticated');
+  const [currentTab, setCurrentTab] = useState('Menu');
 
   const logout = () => {
     removeAuth();
