@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import handleError from './error';
+import handleError from './Error/error';
 
 export const apiUrl = import.meta.env.VITE_API_URL;
 
