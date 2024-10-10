@@ -1,39 +1,21 @@
-import axios, { AxiosError } from 'axios';
-import handleError from './Error/error';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import handleError from '../errors/HandleError';
 
 export const apiUrl = import.meta.env.VITE_API_URL;
+export const apiUser = import.meta.env.VITE_API_USERNAME;
+export const apiPassword = import.meta.env.VITE_API_PASSWORD;
+export const codeAffiliate = import.meta.env.VITE_API_AFFILIATE;
+export const codeSystem = import.meta.env.VITE_API_SYSTEM;
 
-const api = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-});
-
-api.interceptors.request.use(
-  config => {
-    // auth token = response.accessToken q o 365 me devolve ao aceitar o login
-    const token = sessionStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    console.log('Fazendo requisição:', {
-      url: config.url,
-      method: config.method,
-      headers: config.headers,
+export const get = async (url: string): Promise<object | undefined> => {
+  try {
+    const response: AxiosResponse = await axios.get(url, {
+      auth: {
+        username: apiUser,
+        password: apiPassword,
+      },
     });
 
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
-export const get = async (url: string): Promise<any> => {
-  try {
-    const response = await api.get(url);
     return response.data;
   } catch (error) {
     handleError(error as AxiosError);
