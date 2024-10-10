@@ -10,10 +10,10 @@ const BirthdayContent: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getBirthdays(new Date().getMonth() + 1); // Pega o mês atual
+        const response = await getBirthdays(new Date().getMonth() + 1);
         const sortedData = response.sort(
           (a: any, b: any) => a.DTNASCIMENTO - b.DTNASCIMENTO
-        ); // Ordena pelo dia
+        );
         setData(sortedData);
       } catch (error) {
         setError('Erro ao carregar os dados da API');
