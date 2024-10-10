@@ -1,12 +1,12 @@
-import DashboardContent from '../DashboardContent/DashboardContent';
+import BirthdayContent from '../BirthdayContent/BirthdayContent';
 
 const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   const renderContent = () => {
     switch (currentTab) {
       case 'Dashboard':
-        return <DashboardContent />;
-      case 'Calendar':
-        return <div>Conteúdo da aba Calendar</div>;
+        return <div>Conteúdo da aba Dashboard</div>;
+      case 'Aniversários':
+        return <BirthdayContent />;
       default:
         return <div>Conteúdo da aba Menu</div>;
     }
