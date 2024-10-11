@@ -1,7 +1,7 @@
 import { get, apiUrl, codeAffiliate, codeSystem } from './api';
 import { Birthday, ErrorResponse } from '../utils/types';
 
-export const getBirthdays = async (
+export const getMonthlyBirthdays = async (
   month: number
 ): Promise<Birthday[] | ErrorResponse | undefined> => {
   const codSentence = import.meta.env.VITE_API_SENTENCE_BIRTHDAYS;

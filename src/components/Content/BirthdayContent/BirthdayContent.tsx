@@ -1,24 +1,43 @@
 import { useEffect, useState } from 'react';
-import { getBirthdays } from '../../../services/getBirthdays';
+import { Birthday, ErrorResponse } from '../../../utils/types';
+import { getMonthlyBirthdays } from '../../../services/getMonthlyBirthdays';
+import Swal from 'sweetalert2';
 import TableBirthday from '../../TableBirthday/TableBirthday';
 
 const BirthdayContent: React.FC = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Birthday[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getBirthdays(new Date().getMonth() + 1);
-        const sortedData = response.sort(
-          (a: any, b: any) => a.DTNASCIMENTO - b.DTNASCIMENTO
-        );
-        setData(sortedData);
-      } catch (error) {
+        Swal.fire({
+          title: 'Carregando...',
+          html: 'Aguarde enquanto os dados são carregados.',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        const response = await getMonthlyBirthdays(new Date().getMonth() + 1);
+
+        if (Array.isArray(response)) {
+          const sortedData = response.sort(
+            (a: Birthday, b: Birthday) => a.DTNASCIMENTO - b.DTNASCIMENTO
+          );
+          setData(sortedData);
+        } else {
+          const errorResponse = response as ErrorResponse;
+          setError(errorResponse.message || 'Erro desconhecido');
+        }
+      } catch (err) {
+        console.error(err);
         setError('Erro ao carregar os dados da API');
       } finally {
         setLoading(false);
+        Swal.close();
       }
     };
 
