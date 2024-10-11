@@ -1,8 +1,5 @@
 import React from 'react';
-
-interface TableBirthdayProps {
-  data: { NOME: string; DTNASCIMENTO: number }[];
-}
+import { TableBirthdayProps } from '../../utils/types';
 
 const TableBirthday: React.FC<TableBirthdayProps> = ({ data }) => {
   return (
