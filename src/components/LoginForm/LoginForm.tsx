@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/useAuth';
 
@@ -10,13 +10,16 @@ const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const auth = sessionStorage.getItem('isAuthenticated');
 
-  const login = (auth: string | null) => {
-    console.log(auth);
-    if (auth) {
-      setError('');
-      navigate('/home');
-    }
-  };
+  const login = useCallback(
+    (auth: string | null) => {
+      console.log(auth);
+      if (auth) {
+        setError('');
+        navigate('/home');
+      }
+    },
+    [navigate]
+  );
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
