@@ -1,6 +1,6 @@
 import { PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
 interface AuthContextType {
   setAuth: (authToken: string | null) => void;
@@ -8,15 +8,9 @@ interface AuthContextType {
   token: string | null;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 const msalInstance = new PublicClientApplication({
   auth: {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import NavBar from '../../components/NavBar/NavBar';
 import Header from '../../components/Header/Header';
 import MainContent from '../../components/Content/MainContent/MainContent';
+import { useAuth } from '../../auth/useAuth';
 
 const HomePage: React.FC = () => {
   const { removeAuth } = useAuth();

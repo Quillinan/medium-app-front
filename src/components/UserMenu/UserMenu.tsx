@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import IconButton from '../IconButton/IconButton';
+import { useAuth } from '../../auth/useAuth';
 
 const UserMenu: React.FC = () => {
   const { removeAuth } = useAuth();
