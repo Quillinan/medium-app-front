@@ -1,6 +1,6 @@
 import { useMsal } from '@azure/msal-react';
 import microsoft from '/microsoft.svg';
-import { useAuth } from '../../auth/useAuth';
+import { useAuth } from '@auth/useAuth';
 
 const SocialLoginButtons: React.FC = () => {
   const { instance } = useMsal();

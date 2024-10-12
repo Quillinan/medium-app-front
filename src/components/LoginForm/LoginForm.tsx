@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useAuth } from '@auth/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../auth/useAuth';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');

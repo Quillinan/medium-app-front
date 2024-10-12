@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Birthday, ErrorResponse } from '../../../utils/types';
-import { getMonthlyBirthdays } from '../../../services/getMonthlyBirthdays';
-import { showLoading } from '../../../utils/loadingHelper';
-import TableBirthday from '../../TableBirthday/TableBirthday';
+import { Birthday, ErrorResponse } from '@utils/types';
+import { showLoading } from '@utils/loadingHelper';
+import { getMonthlyBirthdays } from '@services/getMonthlyBirthdays';
+import TableBirthday from '@components/TableBirthday/TableBirthday';
 
 const BirthdayContent: React.FC = () => {
   const [data, setData] = useState<Birthday[]>([]);

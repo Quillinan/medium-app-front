@@ -1,7 +1,7 @@
 import { PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
+import { AuthContextType } from '@utils/types';
 import { createContext, ReactNode, useState } from 'react';
-import { AuthContextType } from '../utils/types';
 
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined

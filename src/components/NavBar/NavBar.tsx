@@ -1,4 +1,4 @@
-import UserMenu from '../UserMenu/UserMenu';
+import UserMenu from '@components/UserMenu/UserMenu';
 
 const NavBar: React.FC<{
   currentTab: string;

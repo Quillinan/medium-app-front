@@ -1,6 +1,6 @@
+import handleError from '@errors/HandleError';
+import { ErrorResponse } from '@utils/types';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import handleError from '../errors/HandleError';
-import { ErrorResponse } from '../utils/types';
 
 export const apiUrl = import.meta.env.VITE_API_URL;
 export const apiUser = import.meta.env.VITE_API_USERNAME;

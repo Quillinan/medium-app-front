@@ -1,6 +1,6 @@
+import { useAuth } from '@auth/useAuth';
+import IconButton from '@components/IconButton/IconButton';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../IconButton/IconButton';
-import { useAuth } from '../../auth/useAuth';
 
 const UserMenu: React.FC = () => {
   const { removeAuth } = useAuth();

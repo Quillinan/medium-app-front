@@ -1,6 +1,6 @@
+import { ErrorResponse } from '@utils/types';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { ErrorResponse } from '../utils/types';
 
 const handleError = (error: AxiosError): ErrorResponse => {
   let errorResponse: ErrorResponse = {
