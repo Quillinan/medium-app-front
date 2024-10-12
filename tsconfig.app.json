@@ -18,7 +18,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths configuration */
+    "baseUrl": "src",
+    "paths": {
+      "@auth/*": ["auth/*"],
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
+      "@errors/*": ["errors/*"],
+      "@pages/*": ["pages/*"],
+      "@services/*": ["services/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "include": ["src"]
 }
