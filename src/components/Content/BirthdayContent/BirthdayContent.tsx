@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Birthday, ErrorResponse } from '../../../utils/types';
 import { getMonthlyBirthdays } from '../../../services/getMonthlyBirthdays';
-import Swal from 'sweetalert2';
+import { showLoading } from '../../../utils/loadingHelper';
 import TableBirthday from '../../TableBirthday/TableBirthday';
 
 const BirthdayContent: React.FC = () => {
@@ -9,40 +9,34 @@ const BirthdayContent: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const sortData = useCallback((birthdays: Birthday[]) => {
+    return birthdays.sort((a, b) => a.DTNASCIMENTO - b.DTNASCIMENTO);
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        Swal.fire({
-          title: 'Carregando...',
-          html: 'Aguarde enquanto os dados são carregados.',
-          allowOutsideClick: false,
-          didOpen: () => {
-            Swal.showLoading();
-          },
-        });
-
-        const response = await getMonthlyBirthdays(new Date().getMonth() + 1);
+        const response = await showLoading(
+          getMonthlyBirthdays(new Date().getMonth() + 1)
+        );
 
         if (Array.isArray(response)) {
-          const sortedData = response.sort(
-            (a: Birthday, b: Birthday) => a.DTNASCIMENTO - b.DTNASCIMENTO
-          );
+          const sortedData = sortData(response);
           setData(sortedData);
         } else {
           const errorResponse = response as ErrorResponse;
           setError(errorResponse.message || 'Erro desconhecido');
         }
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
         setError('Erro ao carregar os dados da API');
+        console.error(error);
       } finally {
         setLoading(false);
-        Swal.close();
       }
     };
 
     fetchData();
-  }, []);
+  }, [sortData]);
 
   return (
     <div className='flex items-center justify-center h-full'>
