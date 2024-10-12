@@ -25,7 +25,6 @@
     "paths": {
       "@auth/*": ["auth/*"],
       "@components/*": ["components/*"],
-      "@content/*": ["components/content/*"],
       "@context/*": ["context/*"],
       "@errors/*": ["errors/*"],
       "@pages/*": ["pages/*"],

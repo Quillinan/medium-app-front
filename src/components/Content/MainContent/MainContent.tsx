@@ -1,4 +1,4 @@
-import BirthdayContent from '@components/content/BirthdayContent/BirthdayContent';
+import BirthdayContent from '../BirthdayContent/BirthdayContent';
 
 const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   const renderContent = () => {
