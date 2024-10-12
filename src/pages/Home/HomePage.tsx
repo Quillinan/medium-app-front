@@ -1,5 +1,5 @@
 import { useAuth } from '@auth/useAuth';
-import MainContent from '@components/Content/MainContent/MainContent';
+import MainContent from '@components/content/MainContent/MainContent';
 import Header from '@components/Header/Header';
 import NavBar from '@components/NavBar/NavBar';
 import React, { useState, useEffect } from 'react';
