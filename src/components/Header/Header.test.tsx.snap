@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`Should render header name 1`] = `
-<h1
-  class="text-3xl font-bold tracking-tight text-gray-900"
->
-  test
-</h1>
-`;

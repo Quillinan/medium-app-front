@@ -26,7 +26,8 @@
       "@services/*": ["services/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["src"]
 }
