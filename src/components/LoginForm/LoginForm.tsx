@@ -12,7 +12,6 @@ const LoginForm: React.FC = () => {
 
   const login = useCallback(
     (auth: string | null) => {
-      console.log(auth);
       if (auth) {
         setError('');
         navigate('/home');
