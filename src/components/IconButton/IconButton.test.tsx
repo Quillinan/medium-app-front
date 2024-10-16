@@ -33,4 +33,9 @@ describe('IconButton', () => {
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
   });
+
+  it('should match snapshot', () => {
+    const { asFragment } = render(<IconButton icon={<svg />} />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
