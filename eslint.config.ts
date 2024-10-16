@@ -4,8 +4,9 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import tailwindcss from 'eslint-plugin-tailwindcss';
+import type { ESLintConfig } from 'eslint'; // Importa o tipo ESLintConfig
 
-export default tseslint.config(
+const eslintConfig: ESLintConfig = tseslint.config(
   { ignores: ['dist'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -29,3 +30,5 @@ export default tseslint.config(
     },
   }
 );
+
+export default eslintConfig;
