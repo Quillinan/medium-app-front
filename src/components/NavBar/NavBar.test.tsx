@@ -7,7 +7,7 @@ vi.mock('@components/UserMenu/UserMenu', () => {
   };
 });
 
-describe('NavBar Component', () => {
+describe('NavBar', () => {
   const onTabChangeMock = vi.fn();
 
   beforeEach(() => {
