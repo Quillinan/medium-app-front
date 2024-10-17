@@ -39,7 +39,10 @@ const BirthdayContent: React.FC = () => {
   }, [sortData]);
 
   return (
-    <div className='flex items-center justify-center h-full'>
+    <div
+      data-testid='birthday-content'
+      className='flex items-center justify-center h-full'
+    >
       {loading ? (
         <p>Carregando...</p>
       ) : error ? (

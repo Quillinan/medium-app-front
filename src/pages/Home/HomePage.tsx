@@ -25,7 +25,11 @@ const HomePage: React.FC = () => {
   return (
     <div className='min-h-full'>
       <NavBar currentTab={currentTab} onTabChange={setCurrentTab} />
-      <Header title={currentTab} />
+      <Header
+        title={
+          currentTab === 'Aniversários' ? 'Aniversários do mês' : currentTab
+        }
+      />
       <MainContent currentTab={currentTab} />
     </div>
   );

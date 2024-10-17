@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainContent > should match snapshot 1`] = `
+<DocumentFragment>
+  <main>
+    <div
+      class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
+    >
+      <div>
+        Conteúdo da aba Dashboard
+      </div>
+    </div>
+  </main>
+</DocumentFragment>
+`;

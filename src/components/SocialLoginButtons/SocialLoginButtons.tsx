@@ -6,22 +6,25 @@ const SocialLoginButtons: React.FC = () => {
   const { instance } = useMsal();
   const { setAuth } = useAuth();
 
-  const handleAzureLogin = () => {
-    instance
-      .loginPopup({
+  const handleAzureLogin = async () => {
+    try {
+      const response = await instance.loginPopup({
         scopes: ['user.read'],
-      })
-      .then(response => {
-        const token = response.uniqueId;
-        if (token) {
-          setAuth(token);
-          console.log('Autenticado com sucesso', response);
-        }
-      })
-      .catch(error => {
-        console.error('Erro de autenticação:', error);
       });
+
+      const token = response?.uniqueId;
+
+      if (token) {
+        setAuth(token);
+        console.log('Autenticado com sucesso', response);
+      } else {
+        console.error('Falha ao obter o token de autenticação');
+      }
+    } catch (error) {
+      console.error('Erro de autenticação:', error);
+    }
   };
+
   return (
     <div className='flex flex-col items-center space-y-4'>
       <button

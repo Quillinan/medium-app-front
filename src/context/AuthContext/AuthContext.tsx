@@ -7,11 +7,20 @@ export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
+const deploy = true;
+let clientId = import.meta.env.VITE_API_CLIENTIDDEV;
+let redirectUri = import.meta.env.VITE_API_REDURLDEV;
+
+if (deploy) {
+  clientId = import.meta.env.VITE_API_CLIENTIDPROD;
+  redirectUri = import.meta.env.VITE_API_REDURLPROD;
+}
+
 const msalInstance = new PublicClientApplication({
   auth: {
-    clientId: '1efce811-7a11-4e35-98a8-d85f7b169637',
+    clientId: clientId,
     authority: 'https://login.microsoftonline.com/gruposendas.onmicrosoft.com',
-    redirectUri: 'http://localhost:5173/home',
+    redirectUri: redirectUri,
   },
 });
 
