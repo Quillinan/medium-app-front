@@ -7,7 +7,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
-const deploy = true;
+const deploy = import.meta.env.VITE_API_PROD;
 let clientId = import.meta.env.VITE_API_CLIENTIDDEV;
 let redirectUri = import.meta.env.VITE_API_REDURLDEV;
 
