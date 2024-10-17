@@ -18,7 +18,10 @@ const TableBirthday: React.FC<TableBirthdayProps> = ({ data }) => {
           {data.length > 0 ? (
             data.map((person, index) => (
               <tr key={index} className='border-b border-gray-300'>
-                <td className='px-4 py-2 text-sm text-gray-800'>
+                <td
+                  data-testid={`name-${person.NOME}`}
+                  className='px-4 py-2 text-sm text-gray-800'
+                >
                   {person.NOME}
                 </td>
                 <td className='px-4 py-2 text-sm text-gray-800 text-center'>
