@@ -48,8 +48,7 @@ describe('HomePage', () => {
     const header = screen.getByText(/Aniversários do mês/i);
     expect(header).toBeInTheDocument();
 
-    const content = screen.getByText(/Conteúdo da aba Aniversários/i);
-    expect(content).toBeInTheDocument();
+    expect(screen.getByTestId('birthday-content')).toBeInTheDocument();
   });
 
   it('should match snapshot', () => {
