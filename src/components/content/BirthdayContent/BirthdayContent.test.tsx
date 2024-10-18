@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import BirthdayContent from './BirthdayContent';
 import { getMonthlyBirthdays } from '@services/GetMonthlyBirthdays/GetMonthlyBirthdays';
-import { showLoading } from '@utils/loadingHelper';
+import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 
 describe('BirthdayContent', () => {
   vi.mock('@services/getMonthlyBirthdays', () => ({

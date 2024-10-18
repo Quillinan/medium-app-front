@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@utils/types';
+import { ErrorResponse } from '@utils/Types/Types';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
 

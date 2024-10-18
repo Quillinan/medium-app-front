@@ -1,4 +1,4 @@
-import { TableBirthdayProps } from '@utils/types';
+import { TableBirthdayProps } from '@utils/Types/Types';
 import TableBirthday from './TableBirthday';
 import { render, screen } from '@testing-library/react';
 

@@ -1,5 +1,5 @@
 import handleError from '@errors/HandleError/HandleError';
-import { ErrorResponse } from '@utils/types';
+import { ErrorResponse } from '@utils/Types/Types';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export const apiUrl = import.meta.env.VITE_API_URL;

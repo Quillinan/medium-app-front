@@ -1,4 +1,4 @@
-import { TableBirthdayProps } from '@utils/types';
+import { TableBirthdayProps } from '@utils/Types/Types';
 
 const TableBirthday: React.FC<TableBirthdayProps> = ({ data }) => {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Birthday, ErrorResponse } from '@utils/types';
-import { showLoading } from '@utils/loadingHelper';
+import { Birthday, ErrorResponse } from '@utils/Types/Types';
+import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 import { getMonthlyBirthdays } from '@services/GetMonthlyBirthdays/GetMonthlyBirthdays';
 import TableBirthday from '@components/TableBirthday/TableBirthday';
 
