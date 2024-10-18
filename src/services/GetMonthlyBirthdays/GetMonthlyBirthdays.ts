@@ -1,4 +1,4 @@
-import { get, apiUrl, codeAffiliate, codeSystem } from './api';
+import { apiUrl, codeAffiliate, codeSystem, get } from '@services/Api/Api';
 import { Birthday, ErrorResponse } from '@utils/types';
 
 export const getMonthlyBirthdays = async (

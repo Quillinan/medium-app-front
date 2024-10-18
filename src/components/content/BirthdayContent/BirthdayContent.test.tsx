@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import BirthdayContent from './BirthdayContent';
-import { getMonthlyBirthdays } from '@services/getMonthlyBirthdays';
+import { getMonthlyBirthdays } from '@services/GetMonthlyBirthdays/GetMonthlyBirthdays';
 import { showLoading } from '@utils/loadingHelper';
 
 describe('BirthdayContent', () => {

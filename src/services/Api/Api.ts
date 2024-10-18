@@ -1,4 +1,4 @@
-import handleError from '@errors/HandleError';
+import handleError from '@errors/HandleError/HandleError';
 import { ErrorResponse } from '@utils/types';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 

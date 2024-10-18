@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Birthday, ErrorResponse } from '@utils/types';
 import { showLoading } from '@utils/loadingHelper';
-import { getMonthlyBirthdays } from '@services/getMonthlyBirthdays';
+import { getMonthlyBirthdays } from '@services/GetMonthlyBirthdays/GetMonthlyBirthdays';
 import TableBirthday from '@components/TableBirthday/TableBirthday';
 
 const BirthdayContent: React.FC = () => {
