@@ -3,14 +3,13 @@ import BirthdayContent from './BirthdayContent';
 import { getMonthlyBirthdays } from '@services/GetMonthlyBirthdays/GetMonthlyBirthdays';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 
+vi.mock('@services/GetMonthlyBirthdays/getMonthlyBirthdays', () => ({
+  getMonthlyBirthdays: vi.fn(),
+}));
+vi.mock('@utils/LoadingHelper/LoadingHelper', () => ({
+  showLoading: vi.fn(),
+}));
 describe('BirthdayContent', () => {
-  vi.mock('@services/getMonthlyBirthdays', () => ({
-    getMonthlyBirthdays: vi.fn(),
-  }));
-  vi.mock('@utils/loadingHelper', () => ({
-    showLoading: vi.fn(),
-  }));
-
   it('should display custom error message from API response', async () => {
     const apiErrorResponse = { message: 'Erro no servidor' };
     (getMonthlyBirthdays as jest.Mock).mockResolvedValue(apiErrorResponse);
