@@ -8,6 +8,8 @@ export const apiPassword = import.meta.env.VITE_API_PASSWORD;
 export const codeAffiliate = import.meta.env.VITE_API_AFFILIATE;
 export const codeSystem = import.meta.env.VITE_API_SYSTEM;
 
+export const codeSentenceBirth = import.meta.env.VITE_API_SENTENCE_BIRTHDAYS;
+
 export const get = async (
   url: string
 ): Promise<object | ErrorResponse | undefined> => {
