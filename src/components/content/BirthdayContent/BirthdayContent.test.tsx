@@ -9,6 +9,7 @@ vi.mock('@services/GetMonthlyBirthdays/getMonthlyBirthdays', () => ({
 vi.mock('@utils/LoadingHelper/LoadingHelper', () => ({
   showLoading: vi.fn(),
 }));
+
 describe('BirthdayContent', () => {
   it('should display custom error message from API response', async () => {
     const apiErrorResponse = { message: 'Erro no servidor' };

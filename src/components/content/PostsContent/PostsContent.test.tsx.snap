@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PostsContent > should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex items-center justify-center h-full"
+    data-testid="posts-content"
+  >
+    <p>
+      Carregando...
+    </p>
+  </div>
+</DocumentFragment>
+`;
