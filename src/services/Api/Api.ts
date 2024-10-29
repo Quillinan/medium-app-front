@@ -4,8 +4,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export const apiUrl = import.meta.env.VITE_API_URL;
 export const apiTotvsUrl = import.meta.env.VITE_API_TOTVS_URL;
-export const apiUser = import.meta.env.VITE_API_USERNAME;
-export const apiPassword = import.meta.env.VITE_API_PASSWORD;
+export const apiTotvsUser = import.meta.env.VITE_API_TOTVS_USERNAME;
+export const apiTotvsPassword = import.meta.env.VITE_API_TOTVS_PASSWORD;
 export const codeAffiliate = import.meta.env.VITE_API_AFFILIATE;
 export const codeSystem = import.meta.env.VITE_API_SYSTEM;
 
@@ -29,8 +29,8 @@ export const getTotvs = async (
   try {
     const response: AxiosResponse = await axios.get(url, {
       auth: {
-        username: apiUser,
-        password: apiPassword,
+        username: apiTotvsUser,
+        password: apiTotvsPassword,
       },
     });
     return response.data;

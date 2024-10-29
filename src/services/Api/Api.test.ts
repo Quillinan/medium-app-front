@@ -67,8 +67,8 @@ describe('getTotvs', () => {
     expect(result).toEqual(mockData);
     expect(axios.get).toHaveBeenCalledWith(url, {
       auth: {
-        username: import.meta.env.VITE_API_USERNAME,
-        password: import.meta.env.VITE_API_PASSWORD,
+        username: import.meta.env.VITE_API_TOTVS_USERNAME,
+        password: import.meta.env.VITE_API_TOTVS_PASSWORD,
       },
     });
   });
