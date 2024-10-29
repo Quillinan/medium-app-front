@@ -25,7 +25,7 @@ const PostsContent: React.FC = () => {
   }
 
   return (
-    <div className='space-y-8'>
+    <div data-testid='posts-content' className='space-y-8'>
       {posts.map(post => (
         <div
           key={post.id}

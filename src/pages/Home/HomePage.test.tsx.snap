@@ -99,6 +99,7 @@ exports[`HomePage > should match snapshot 1`] = `
       >
         <div
           class="space-y-8"
+          data-testid="posts-content"
         />
       </div>
     </main>
