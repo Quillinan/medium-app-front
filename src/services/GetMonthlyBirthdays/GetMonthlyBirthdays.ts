@@ -1,21 +1,22 @@
+import { ErrorResponse, Birthday } from '@utils/Types/Types';
 import {
-  apiUrl,
+  apiTotvsUrl,
   codeAffiliate,
   codeSystem,
   codeSentenceBirth,
-  get,
+  getTotvs,
 } from '@services/Api/Api';
-import { Birthday, ErrorResponse } from '@utils/Types/Types';
+import handleError from '@errors/HandleError/HandleError';
 
 export const getMonthlyBirthdays = async (
   month: number
-): Promise<Birthday[] | ErrorResponse | undefined> => {
-  const url = `${apiUrl}/${codeSentenceBirth}/${codeAffiliate}/${codeSystem}?parameters=MES_S%3D${month}`;
+): Promise<Birthday[] | ErrorResponse> => {
+  const url = `${apiTotvsUrl}/${codeSentenceBirth}/${codeAffiliate}/${codeSystem}?parameters=MES_S%3D${month}`;
 
   try {
-    const response = await get(url);
+    const response = await getTotvs(url);
     return response as Birthday[];
   } catch (error: any) {
-    return error.response.data as ErrorResponse;
+    return handleError(error);
   }
 };

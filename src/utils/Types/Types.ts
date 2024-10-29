@@ -20,3 +20,12 @@ export interface Birthday {
 export interface TableBirthdayProps {
   data: { NOME: string; DTNASCIMENTO: number }[];
 }
+
+export interface Post {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+  authorId: string;
+}

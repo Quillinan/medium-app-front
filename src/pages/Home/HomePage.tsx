@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
   const { removeAuth } = useAuth();
   const navigate = useNavigate();
   const auth = sessionStorage.getItem('isAuthenticated');
-  const [currentTab, setCurrentTab] = useState('Post');
+  const [currentTab, setCurrentTab] = useState('Posts');
 
   const logout = () => {
     removeAuth();

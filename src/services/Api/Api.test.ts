@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import handleError from '@errors/HandleError/HandleError';
 import { ErrorResponse } from '@utils/Types/Types';
-import { get } from './Api';
+import { getTotvs } from './Api';
 
 vi.mock('axios');
 
@@ -16,7 +16,7 @@ vi.mock('@errors/HandleError/HandleError', () => {
   };
 });
 
-describe('get', () => {
+describe('getTotvs', () => {
   const url = 'http://example.com/api/data';
 
   it('should handle error and return ErrorResponse when API call fails', async () => {
@@ -49,7 +49,7 @@ describe('get', () => {
 
     (handleError as jest.Mock).mockReturnValue(errorResponseMock);
 
-    const result = await get(url);
+    const result = await getTotvs(url);
 
     expect(result).toEqual(errorResponseMock);
     expect(handleError).toHaveBeenCalledWith(mockError);
@@ -62,7 +62,7 @@ describe('get', () => {
       data: mockData,
     });
 
-    const result = await get(url);
+    const result = await getTotvs(url);
 
     expect(result).toEqual(mockData);
     expect(axios.get).toHaveBeenCalledWith(url, {

@@ -1,4 +1,5 @@
 import BirthdayContent from '../BirthdayContent/BirthdayContent';
+import PostsContent from '../PostsContent/PostContent';
 
 const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   const renderContent = () => {
@@ -8,7 +9,7 @@ const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
       case 'Aniversários':
         return <BirthdayContent />;
       default:
-        return <div>Conteúdo da aba Post</div>;
+        return <PostsContent />;
     }
   };
 

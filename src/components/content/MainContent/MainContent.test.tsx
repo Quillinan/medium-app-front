@@ -4,13 +4,13 @@ import MainContent from './MainContent';
 describe('MainContent', () => {
   it('should render Post content when no currentTab is provided', () => {
     render(<MainContent currentTab='' />);
-    const defaultContent = screen.getByText(/Conteúdo da aba Post/i);
+    const defaultContent = screen.getByTestId('posts-content');
     expect(defaultContent).toBeInTheDocument();
   });
 
   it('should render Post content by default when no matching tab is provided', () => {
     render(<MainContent currentTab='UnknownTab' />);
-    const defaultContent = screen.getByText(/Conteúdo da aba Post/i);
+    const defaultContent = screen.getByTestId('posts-content');
     expect(defaultContent).toBeInTheDocument();
   });
 
@@ -22,7 +22,7 @@ describe('MainContent', () => {
     expect(screen.getByTestId('birthday-content')).toBeInTheDocument();
 
     rerender(<MainContent currentTab='UnknownTab' />);
-    expect(screen.getByText(/Conteúdo da aba Post/i)).toBeInTheDocument();
+    expect(screen.getByTestId('posts-content')).toBeInTheDocument();
   });
 
   it('should render createPostContent content when currentTab is Criar Post', () => {
