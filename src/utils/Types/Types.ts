@@ -24,8 +24,10 @@ export interface TableBirthdayProps {
 export interface Post {
   id: number;
   title: string;
+  subtitle: string;
   content: string;
   createdAt: Date;
   updatedAt: Date;
   authorId: string;
+  authorName: string;
 }

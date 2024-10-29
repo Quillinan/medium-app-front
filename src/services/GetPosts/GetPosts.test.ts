@@ -35,21 +35,23 @@ describe('getPosts', () => {
     const mockPosts: Post[] = [
       {
         id: 1,
-        title: 'Understanding TypeScript',
-        content:
-          'This is a post about TypeScript basics and advanced concepts.',
-        createdAt: new Date('2023-05-15T08:30:00Z'),
-        updatedAt: new Date('2023-06-01T12:00:00Z'),
-        authorId: 'author123',
+        title: 'First Post',
+        subtitle: 'Subtitle of First Post',
+        content: 'This is the content of the first post.',
+        createdAt: new Date('2024-10-29T00:00:00Z'),
+        updatedAt: new Date('2024-10-29T00:00:00Z'),
+        authorId: '123',
+        authorName: 'Author One',
       },
       {
         id: 2,
-        title: 'Exploring Node.js',
-        content:
-          'This post dives into Node.js and its applications in server-side development.',
-        createdAt: new Date('2023-07-10T10:00:00Z'),
-        updatedAt: new Date('2023-07-20T15:45:00Z'),
-        authorId: 'author456',
+        title: 'Second Post',
+        subtitle: 'Subtitle of Second Post',
+        content: 'This is the content of the second post.',
+        createdAt: new Date('2024-10-29T00:00:00Z'),
+        updatedAt: new Date('2024-10-29T00:00:00Z'),
+        authorId: '456',
+        authorName: 'Author Two',
       },
     ];
 

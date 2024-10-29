@@ -15,13 +15,11 @@ const PostContentList: React.FC<PostContentListProps> = ({ data }) => {
           <h2 className='mt-1 text-2xl font-semibold text-gray-900'>
             {post.title}
           </h2>
-          <p className='mt-2 text-gray-700'>{post.content.slice(0, 100)}...</p>
+          <p className='mt-2 text-gray-700'>{post.subtitle}</p>
           <p className='mt-1 text-sm text-gray-500'>
             Criado em: {new Date(post.createdAt).toLocaleDateString()}
           </p>
-          <p className='mt-1 text-sm text-gray-500'>
-            Autor ID: {post.authorId}
-          </p>
+          <p className='mt-1 text-sm text-gray-500'>Autor: {post.authorName}</p>
         </div>
       ))}
     </div>
