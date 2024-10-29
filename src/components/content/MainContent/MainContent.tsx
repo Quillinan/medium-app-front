@@ -3,12 +3,12 @@ import BirthdayContent from '../BirthdayContent/BirthdayContent';
 const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   const renderContent = () => {
     switch (currentTab) {
-      case 'Dashboard':
-        return <div>Conteúdo da aba Dashboard</div>;
+      case 'Criar Post':
+        return <div>Conteúdo da aba Criar Post</div>;
       case 'Aniversários':
         return <BirthdayContent />;
       default:
-        return <div>Conteúdo da aba Menu</div>;
+        return <div>Conteúdo da aba Post</div>;
     }
   };
 
