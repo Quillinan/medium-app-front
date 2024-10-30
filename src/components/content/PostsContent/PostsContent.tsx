@@ -17,9 +17,9 @@ const PostsContent: React.FC = () => {
       } else {
         setData(response as Post[]);
       }
-    } catch (err) {
+    } catch (error) {
       setError('Erro ao carregar os dados da API');
-      console.error(err);
+      console.error(error);
     }
   }, []);
 

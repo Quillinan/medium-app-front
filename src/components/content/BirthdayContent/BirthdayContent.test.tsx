@@ -11,6 +11,11 @@ vi.mock('@utils/LoadingHelper/LoadingHelper', () => ({
 }));
 
 describe('BirthdayContent', () => {
+  const mockBirthdays = [
+    { NOME: 'Alice', DTNASCIMENTO: 1 },
+    { NOME: 'Bob', DTNASCIMENTO: 2 },
+  ];
+
   it('should display custom error message from API response', async () => {
     const apiErrorResponse = { message: 'Erro no servidor' };
     (getMonthlyBirthdays as jest.Mock).mockResolvedValue(apiErrorResponse);
@@ -18,6 +23,7 @@ describe('BirthdayContent', () => {
 
     render(<BirthdayContent />);
 
+    expect(showLoading).toHaveBeenCalled();
     const error = await screen.findByText('Erro no servidor');
     expect(error).toBeInTheDocument();
   });
@@ -31,26 +37,18 @@ describe('BirthdayContent', () => {
 
     render(<BirthdayContent />);
 
+    expect(showLoading).toHaveBeenCalled();
     const error = await screen.findByText(errorMessage);
     expect(error).toBeInTheDocument();
   });
 
-  it('should display loading message while fetching data', () => {
-    render(<BirthdayContent />);
-    const loadingMessage = screen.getByText('Carregando...');
-    expect(loadingMessage).toBeInTheDocument();
-  });
-
   it('should display birthday data when fetching is successful', async () => {
-    const mockBirthdays = [
-      { NOME: 'Alice', DTNASCIMENTO: 1 },
-      { NOME: 'Bob', DTNASCIMENTO: 2 },
-    ];
-
     (getMonthlyBirthdays as jest.Mock).mockResolvedValue(mockBirthdays);
     (showLoading as jest.Mock).mockResolvedValue(mockBirthdays);
 
     render(<BirthdayContent />);
+
+    expect(showLoading).toHaveBeenCalled();
 
     await waitFor(() => {
       expect(screen.getByText('Alice')).toBeInTheDocument();
@@ -59,15 +57,12 @@ describe('BirthdayContent', () => {
   });
 
   it('should sort the birthdays by date', async () => {
-    const mockBirthdays = [
-      { NOME: 'Alice', DTNASCIMENTO: 1 },
-      { NOME: 'Bob', DTNASCIMENTO: 2 },
-    ];
-
     (getMonthlyBirthdays as jest.Mock).mockResolvedValue(mockBirthdays);
     (showLoading as jest.Mock).mockResolvedValue(mockBirthdays);
 
     render(<BirthdayContent />);
+
+    expect(showLoading).toHaveBeenCalled();
 
     await waitFor(() => {
       const aliceName = screen.getByTestId('name-Alice');
