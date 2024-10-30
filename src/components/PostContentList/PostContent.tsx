@@ -19,7 +19,7 @@ const PostContentList: React.FC<PostContentListProps> = ({ data }) => {
           <p className='mt-1 text-sm text-gray-500'>
             Criado em:{' '}
             {new Date(post.createdAt).toLocaleDateString('pt-BR', {
-              timeZone: 'UTC', // Define o fuso horário
+              timeZone: 'UTC',
               year: 'numeric',
               month: '2-digit',
               day: '2-digit',

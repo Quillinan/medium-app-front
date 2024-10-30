@@ -23,7 +23,8 @@ const HomePage: React.FC = () => {
   }, [auth]);
 
   return (
-    <div className='min-h-full'>
+    <div id='app' className='flex flex-col min-h-screen'>
+      {' '}
       <NavBar currentTab={currentTab} onTabChange={setCurrentTab} />
       <Header
         title={

@@ -1,11 +1,12 @@
 import BirthdayContent from '../BirthdayContent/BirthdayContent';
+import CreatePostContent from '../CreatePostContent/CreatePostContent';
 import PostsContent from '../PostsContent/PostsContent';
 
 const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   const renderContent = () => {
     switch (currentTab) {
       case 'Criar Post':
-        return <div>Conteúdo da aba Criar Post</div>;
+        return <CreatePostContent />;
       case 'Aniversários':
         return <BirthdayContent />;
       default:
@@ -14,10 +15,8 @@ const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   };
 
   return (
-    <main data-testid='main-content'>
-      <div className='mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
-        {renderContent()}
-      </div>
+    <main data-testid='main-content' className='flex-1 overflow-y-auto h-full'>
+      {renderContent()}
     </main>
   );
 };
