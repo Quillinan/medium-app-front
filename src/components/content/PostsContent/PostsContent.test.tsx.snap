@@ -6,9 +6,9 @@ exports[`PostsContent > should match snapshot 1`] = `
     class="flex items-center justify-center h-full"
     data-testid="posts-content"
   >
-    <p>
-      Carregando...
-    </p>
+    <div
+      class="space-y-8"
+    />
   </div>
 </DocumentFragment>
 `;
