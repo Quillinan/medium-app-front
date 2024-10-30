@@ -17,7 +17,13 @@ const PostContentList: React.FC<PostContentListProps> = ({ data }) => {
           </h2>
           <p className='mt-2 text-gray-700'>{post.subtitle}</p>
           <p className='mt-1 text-sm text-gray-500'>
-            Criado em: {new Date(post.createdAt).toLocaleDateString()}
+            Criado em:{' '}
+            {new Date(post.createdAt).toLocaleDateString('pt-BR', {
+              timeZone: 'UTC', // Define o fuso horário
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })}{' '}
           </p>
           <p className='mt-1 text-sm text-gray-500'>Autor: {post.authorName}</p>
         </div>
