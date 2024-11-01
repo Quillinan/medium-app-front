@@ -12,10 +12,12 @@ const SocialLoginButtons: React.FC = () => {
         scopes: ['user.read'],
       });
 
-      const token = response?.uniqueId;
+      const username = response?.account?.name ?? null;
+      const userId = response?.uniqueId ?? null;
+      const token = response?.accessToken ?? null;
 
       if (token) {
-        setAuth(token);
+        setAuth(token, userId, username);
         console.log('Autenticado com sucesso', response);
       } else {
         console.error('Falha ao obter o token de autenticação');

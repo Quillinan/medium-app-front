@@ -30,7 +30,7 @@ const PostsContent: React.FC = () => {
   return (
     <div
       data-testid='posts-content'
-      className='flex items-center justify-center h-full'
+      className='flex items-center justify-center h-full mt-4'
     >
       {error ? <p>{error}</p> : <PostContentList data={data} />}
     </div>

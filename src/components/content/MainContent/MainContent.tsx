@@ -2,11 +2,26 @@ import BirthdayContent from '../BirthdayContent/BirthdayContent';
 import CreatePostContent from '../CreatePostContent/CreatePostContent';
 import PostsContent from '../PostsContent/PostsContent';
 
-const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
+interface MainContentProps {
+  currentTab: string;
+  setCoverImage: (file: File | null) => void; // Função para atualizar a imagem de capa
+  coverImage: File | null; // Estado atual da imagem de capa
+}
+
+const MainContent: React.FC<MainContentProps> = ({
+  currentTab,
+  setCoverImage,
+  coverImage, // Recebe a imagem de capa
+}) => {
   const renderContent = () => {
     switch (currentTab) {
       case 'Criar Post':
-        return <CreatePostContent />;
+        return (
+          <CreatePostContent
+            setCoverImage={setCoverImage} // Passa a função para atualizar a imagem
+            coverImage={coverImage} // Passa a imagem de capa atual
+          />
+        );
       case 'Aniversários':
         return <BirthdayContent />;
       default:
@@ -15,7 +30,10 @@ const MainContent: React.FC<{ currentTab: string }> = ({ currentTab }) => {
   };
 
   return (
-    <main data-testid='main-content' className='flex-1 overflow-y-auto h-full'>
+    <main
+      data-testid='main-content'
+      className='flex justify-center items-center h-full'
+    >
       {renderContent()}
     </main>
   );

@@ -28,26 +28,44 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [uniqueId, setUniqueId] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>(null);
 
-  const setAuth = (authToken: string | null) => {
+  const setAuth = (
+    authToken: string | null,
+    authUniqueId: string | null,
+    authName: string | null
+  ) => {
     if (authToken) {
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('authToken', authToken);
+      sessionStorage.setItem('uniqueId', authUniqueId || '');
+      sessionStorage.setItem('name', authName || '');
     } else {
       sessionStorage.removeItem('isAuthenticated');
       sessionStorage.removeItem('authToken');
+      sessionStorage.removeItem('uniqueId');
+      sessionStorage.removeItem('name');
     }
     setToken(authToken);
+    setUniqueId(authUniqueId);
+    setName(authName);
   };
 
   const removeAuth = () => {
     sessionStorage.removeItem('isAuthenticated');
     sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('uniqueId');
+    sessionStorage.removeItem('name');
     setToken(null);
+    setUniqueId(null);
+    setName(null);
   };
 
   return (
-    <AuthContext.Provider value={{ setAuth, removeAuth, token }}>
+    <AuthContext.Provider
+      value={{ setAuth, removeAuth, token, uniqueId, name }}
+    >
       <MsalProvider instance={msalInstance}>{children}</MsalProvider>
     </AuthContext.Provider>
   );

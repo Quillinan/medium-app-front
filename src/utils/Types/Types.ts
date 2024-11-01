@@ -1,7 +1,13 @@
 export interface AuthContextType {
-  setAuth: (authToken: string | null) => void;
+  setAuth: (
+    authToken: string | null,
+    uniqueId: string | null,
+    name: string | null
+  ) => void;
   removeAuth: () => void;
   token: string | null;
+  uniqueId: string | null;
+  name: string | null;
 }
 
 export interface ErrorResponse {
@@ -30,4 +36,14 @@ export interface Post {
   updatedAt: Date;
   authorId: string;
   authorName: string;
+  coverImageUrl: string;
+}
+
+export interface CreatePostData {
+  title: string;
+  subtitle: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  coverImage?: File | null;
 }

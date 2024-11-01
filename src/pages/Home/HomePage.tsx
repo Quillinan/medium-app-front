@@ -10,6 +10,7 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const auth = sessionStorage.getItem('isAuthenticated');
   const [currentTab, setCurrentTab] = useState('Posts');
+  const [coverImage, setCoverImage] = useState<File | null>(null); // Estado para a imagem de capa
 
   const logout = () => {
     removeAuth();
@@ -24,14 +25,20 @@ const HomePage: React.FC = () => {
 
   return (
     <div id='app' className='flex flex-col min-h-screen'>
-      {' '}
       <NavBar currentTab={currentTab} onTabChange={setCurrentTab} />
       <Header
         title={
           currentTab === 'Aniversários' ? 'Aniversários do mês' : currentTab
         }
+        onTabChange={setCurrentTab} // Passa a função onTabChange para o Header
+        coverImage={coverImage} // Passa a imagem de capa para o Header
+        setCoverImage={setCoverImage} // Passa a função para atualizar a imagem
       />
-      <MainContent currentTab={currentTab} />
+      <MainContent
+        currentTab={currentTab}
+        setCoverImage={setCoverImage} // Passa a função para atualizar a imagem
+        coverImage={coverImage} // Passa a imagem de capa atual
+      />
     </div>
   );
 };

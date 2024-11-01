@@ -23,6 +23,23 @@ export const get = async (
   }
 };
 
+export const post = async (
+  url: string,
+  body: FormData
+): Promise<object | ErrorResponse | undefined> => {
+  try {
+    const response: AxiosResponse = await axios.post(url, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const errorResponse = handleError(error as AxiosError);
+    return errorResponse;
+  }
+};
+
 export const getTotvs = async (
   url: string
 ): Promise<object | ErrorResponse | undefined> => {

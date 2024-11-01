@@ -1,59 +1,75 @@
 import ImageDropzone from '@components/ImageDropzone/ImageDropzone';
 import SubtitleInput from '@components/SubtitleInput/SubtitleInput';
 import TitleInput from '@components/TitleInput/TitleInput';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const CreatePostContent: React.FC = () => {
+interface CreatePostContentProps {
+  setCoverImage: (file: File | null) => void; // Função para atualizar a imagem de capa
+  coverImage: File | null; // Estado atual da imagem de capa
+}
+
+const CreatePostContent: React.FC<CreatePostContentProps> = ({
+  setCoverImage,
+  coverImage,
+}) => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [content, setContent] = useState('');
-  const [coverImage, setCoverImage] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const quillRef = useRef<ReactQuill>(null);
 
   const saveDraft = () => {
-    const draft = { title, subtitle, content, coverImage };
+    const draft = { title, subtitle, content };
     localStorage.setItem('draftPost', JSON.stringify(draft));
   };
 
-  useEffect(() => {
+  const loadDraft = () => {
     const draft = localStorage.getItem('draftPost');
     if (draft) {
-      const { title, subtitle, content, coverImage } = JSON.parse(draft);
+      const { title, subtitle, content } = JSON.parse(draft);
       setTitle(title);
       setSubtitle(subtitle);
       setContent(content);
-      setCoverImage(coverImage);
     }
+    setIsLoaded(true);
+  };
 
-    return () => {
-      if (coverImage) URL.revokeObjectURL(coverImage);
-    };
-  }, [coverImage]);
+  useEffect(() => {
+    loadDraft();
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      saveDraft();
+    }
+  }, [title, subtitle, content, isLoaded]);
+
+  useEffect(() => {
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      editor.root.style.minHeight = '200px'; // Define a altura mínima
+    }
+  }, [quillRef.current]);
+
+  const handleImageUpload = (image: File) => {
+    setCoverImage(image); // Atualiza a imagem de capa
+  };
 
   return (
-    <div data-testId='create-post-content' className='flex flex-col h-full p-4'>
+    <div
+      data-testid='create-post-content'
+      className='flex flex-col h-full p-4 space-y-4 w-1/2'
+    >
       <TitleInput title={title} onTitleChange={setTitle} />
       <SubtitleInput subtitle={subtitle} onSubtitleChange={setSubtitle} />
+      <ReactQuill ref={quillRef} value={content} onChange={setContent} />
       <ImageDropzone
-        coverImage={coverImage}
-        onImageUpload={setCoverImage}
-        onImageRemove={() => setCoverImage(null)}
+        coverImage={coverImage} // Passa a imagem de capa atual
+        onImageUpload={handleImageUpload} // Passa a função de upload
+        onImageRemove={() => setCoverImage(null)} // Função para remover a imagem
       />
-      <ReactQuill
-        value={content}
-        onChange={setContent}
-        className='mb-6'
-        style={{ height: '15em', overflowY: 'auto' }} // O ReactQuill deve ter um comportamento correto aqui
-      />
-      <div className='flex justify-center'>
-        <button
-          onClick={saveDraft}
-          className='mt-4 bg-blue-500 text-white rounded px-2 py-1'
-        >
-          Publicar Post
-        </button>
-      </div>
     </div>
   );
 };
