@@ -38,7 +38,9 @@ describe('SocialLoginButtons', () => {
 
   it('should call loginPopup and setAuth on successful login', async () => {
     mockLoginPopup.mockResolvedValueOnce({
-      uniqueId: 'mock-token',
+      account: { name: 'mock-username' },
+      uniqueId: 'mock-userId',
+      accessToken: 'mock-token',
     });
 
     render(<SocialLoginButtons />);
@@ -50,9 +52,13 @@ describe('SocialLoginButtons', () => {
       scopes: ['user.read'],
     });
 
-    await screen.findByText('Microsoft');
+    await screen.findByRole('button', { name: /Microsoft/i }); // Aguarda o botão aparecer novamente após o clique
 
-    expect(mockSetAuth).toHaveBeenCalledWith('mock-token');
+    expect(mockSetAuth).toHaveBeenCalledWith(
+      'mock-token',
+      'mock-userId',
+      'mock-username'
+    );
   });
 
   it('should handle login errors', async () => {
