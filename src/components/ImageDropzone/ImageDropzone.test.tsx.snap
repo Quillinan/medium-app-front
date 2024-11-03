@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ImageDropzone > should render the component correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="border-dashed border-2 border-gray-400 p-4 mb-4 text-center"
+    role="presentation"
+    tabindex="0"
+  >
+    <input
+      accept="image/*"
+      multiple=""
+      style="display: none;"
+      tabindex="-1"
+      type="file"
+    />
+    <p>
+      Arraste ou clique para adicionar uma imagem de capa
+    </p>
+  </div>
+</DocumentFragment>
+`;
