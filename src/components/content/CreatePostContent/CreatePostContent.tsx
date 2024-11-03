@@ -6,8 +6,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface CreatePostContentProps {
-  setCoverImage: (file: File | null) => void; // Função para atualizar a imagem de capa
-  coverImage: File | null; // Estado atual da imagem de capa
+  setCoverImage: (file: File | null) => void;
+  coverImage: File | null;
 }
 
 const CreatePostContent: React.FC<CreatePostContentProps> = ({
@@ -17,7 +17,6 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [content, setContent] = useState('');
-  const [isLoaded, setIsLoaded] = useState(false);
   const quillRef = useRef<ReactQuill>(null);
 
   const saveDraft = () => {
@@ -26,14 +25,12 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
   };
 
   const loadDraft = () => {
-    const draft = localStorage.getItem('draftPost');
+    const draft = JSON.parse(localStorage.getItem('draftPost') || '{}');
     if (draft) {
-      const { title, subtitle, content } = JSON.parse(draft);
-      setTitle(title);
-      setSubtitle(subtitle);
-      setContent(content);
+      setTitle(draft.title || '');
+      setSubtitle(draft.subtitle || '');
+      setContent(draft.content || '');
     }
-    setIsLoaded(true);
   };
 
   useEffect(() => {
@@ -41,20 +38,20 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isLoaded) {
+    if (title || subtitle || content) {
       saveDraft();
     }
-  }, [title, subtitle, content, isLoaded]);
+  }, [title, subtitle, content]);
 
   useEffect(() => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
-      editor.root.style.minHeight = '200px'; // Define a altura mínima
+      editor.root.style.minHeight = '200px';
     }
   }, [quillRef.current]);
 
   const handleImageUpload = (image: File) => {
-    setCoverImage(image); // Atualiza a imagem de capa
+    setCoverImage(image);
   };
 
   return (
@@ -66,9 +63,9 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
       <SubtitleInput subtitle={subtitle} onSubtitleChange={setSubtitle} />
       <ReactQuill ref={quillRef} value={content} onChange={setContent} />
       <ImageDropzone
-        coverImage={coverImage} // Passa a imagem de capa atual
-        onImageUpload={handleImageUpload} // Passa a função de upload
-        onImageRemove={() => setCoverImage(null)} // Função para remover a imagem
+        coverImage={coverImage}
+        onImageUpload={handleImageUpload}
+        onImageRemove={() => setCoverImage(null)}
       />
     </div>
   );

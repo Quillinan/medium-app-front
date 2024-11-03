@@ -8,6 +8,7 @@ const SubtitleInput: React.FC<SubtitleInputProps> = ({
   onSubtitleChange,
 }) => (
   <input
+    data-testid='subtitle-input'
     type='text'
     placeholder='Subtítulo'
     value={subtitle}

@@ -5,6 +5,7 @@ interface TitleInputProps {
 
 const TitleInput: React.FC<TitleInputProps> = ({ title, onTitleChange }) => (
   <input
+    data-testid='title-input'
     type='text'
     placeholder='Título'
     value={title}
