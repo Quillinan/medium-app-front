@@ -23,6 +23,7 @@ describe('PostsContent', () => {
       updatedAt: new Date('2024-10-28T00:00:00Z'),
       authorId: '123',
       authorName: 'Author One',
+      coverImageUrl: 'http://example.com/image1.jpg',
     },
     {
       id: 2,
@@ -33,10 +34,11 @@ describe('PostsContent', () => {
       updatedAt: new Date('2024-10-29T00:00:00Z'),
       authorId: '456',
       authorName: 'Author Two',
+      coverImageUrl: 'http://example.com/image2.jpg',
     },
   ];
 
-  it('should display generic error message if fetching data fails', async () => {
+  it('should display a generic error message if fetching data fails', async () => {
     const errorMessage = 'Erro ao carregar os dados da API';
     (getPosts as jest.Mock).mockRejectedValue(new Error('Erro no servidor'));
 
@@ -47,7 +49,7 @@ describe('PostsContent', () => {
     expect(error).toBeInTheDocument();
   });
 
-  it('should display error message if fetching data fails', async () => {
+  it('should display an error message if fetching data fails', async () => {
     const errorMessage = 'Erro ao carregar os dados da API';
     (getPosts as jest.Mock).mockRejectedValue(new Error(errorMessage));
     (showLoading as jest.Mock).mockRejectedValue(new Error(errorMessage));
@@ -73,7 +75,6 @@ describe('PostsContent', () => {
       expect(screen.getByText('First Post')).toBeInTheDocument();
       expect(screen.getByText('Subtitle of First Post')).toBeInTheDocument();
       expect(screen.getByText('Autor: Author One')).toBeInTheDocument();
-
       expect(screen.getByText('Second Post')).toBeInTheDocument();
       expect(screen.getByText('Subtitle of Second Post')).toBeInTheDocument();
       expect(screen.getByText('Autor: Author Two')).toBeInTheDocument();
