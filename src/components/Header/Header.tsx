@@ -6,7 +6,7 @@ interface HeaderProps {
   title: string;
   coverImage: File | null;
   setCoverImage: (file: File | null) => void;
-  onTabChange: (tab: string) => void; // Adiciona a função onTabChange como prop
+  onTabChange: (tab: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -44,7 +44,6 @@ const Header: React.FC<HeaderProps> = ({
       coverImage,
     };
 
-    // Chama a função createPost do serviço
     const result = await createPost(postData);
 
     if (result) {
@@ -52,12 +51,11 @@ const Header: React.FC<HeaderProps> = ({
         title: 'Sucesso',
         text: 'Post criado com sucesso!',
         icon: 'success',
+      }).then(() => {
+        localStorage.removeItem('draftPost');
+        setCoverImage(null);
+        onTabChange('Posts');
       });
-      localStorage.removeItem('draftPost'); // Limpa o rascunho
-      setCoverImage(null); // Reseta a imagem de capa
-
-      // Força a navegação para a aba 'Posts'
-      onTabChange('Posts');
     } else {
       Swal.fire({
         title: 'Erro',
