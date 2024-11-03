@@ -4,22 +4,22 @@ import PostsContent from '../PostsContent/PostsContent';
 
 interface MainContentProps {
   currentTab: string;
-  setCoverImage: (file: File | null) => void; // Função para atualizar a imagem de capa
-  coverImage: File | null; // Estado atual da imagem de capa
+  setCoverImage: (file: File | null) => void;
+  coverImage: File | null;
 }
 
 const MainContent: React.FC<MainContentProps> = ({
   currentTab,
   setCoverImage,
-  coverImage, // Recebe a imagem de capa
+  coverImage,
 }) => {
   const renderContent = () => {
     switch (currentTab) {
       case 'Criar Post':
         return (
           <CreatePostContent
-            setCoverImage={setCoverImage} // Passa a função para atualizar a imagem
-            coverImage={coverImage} // Passa a imagem de capa atual
+            setCoverImage={setCoverImage}
+            coverImage={coverImage}
           />
         );
       case 'Aniversários':

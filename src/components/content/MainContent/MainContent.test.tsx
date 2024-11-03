@@ -2,43 +2,56 @@ import { render, screen } from '@testing-library/react';
 import MainContent from './MainContent';
 
 describe('MainContent', () => {
-  it('should render Post content when no currentTab is provided', () => {
-    render(<MainContent currentTab='' />);
+  it('should render PostsContent by default when an unknown tab is provided', () => {
+    render(
+      <MainContent
+        currentTab='UnknownTab'
+        setCoverImage={() => {}}
+        coverImage={null}
+      />
+    );
     const defaultContent = screen.getByTestId('posts-content');
     expect(defaultContent).toBeInTheDocument();
   });
-
-  it('should render Post content by default when no matching tab is provided', () => {
-    render(<MainContent currentTab='UnknownTab' />);
+  it('should render PostsContent by default when no currentTab is provided', () => {
+    render(
+      <MainContent currentTab='' setCoverImage={() => {}} coverImage={null} />
+    );
     const defaultContent = screen.getByTestId('posts-content');
     expect(defaultContent).toBeInTheDocument();
   });
-
-  it('should render the correct content based on currentTab prop', () => {
-    const { rerender } = render(<MainContent currentTab='Criar Post' />);
-    expect(screen.getByText(/Conteúdo da aba Criar Post/i)).toBeInTheDocument();
-
-    rerender(<MainContent currentTab='Aniversários' />);
-    expect(screen.getByTestId('birthday-content')).toBeInTheDocument();
-
-    rerender(<MainContent currentTab='UnknownTab' />);
-    expect(screen.getByTestId('posts-content')).toBeInTheDocument();
-  });
-
-  it('should render createPostContent content when currentTab is Criar Post', () => {
-    render(<MainContent currentTab='Criar Post' />);
-    const createPostContent = screen.getByText(/Conteúdo da aba Criar Post/i);
+  it('should render CreatePostContent when currentTab is "Criar Post"', () => {
+    render(
+      <MainContent
+        currentTab='Criar Post'
+        setCoverImage={() => {}}
+        coverImage={null}
+      />
+    );
+    const createPostContent = screen.getByTestId('create-post-content');
     expect(createPostContent).toBeInTheDocument();
   });
 
-  it('should render BirthdayContent component when currentTab is Aniversários', () => {
-    render(<MainContent currentTab='Aniversários' />);
+  it('should render BirthdayContent when currentTab is "Aniversários"', () => {
+    render(
+      <MainContent
+        currentTab='Aniversários'
+        setCoverImage={() => {}}
+        coverImage={null}
+      />
+    );
     const birthdayContent = screen.getByTestId('birthday-content');
     expect(birthdayContent).toBeInTheDocument();
   });
 
-  it('should match snapshot', () => {
-    const { asFragment } = render(<MainContent currentTab='Criar Post' />);
+  it('should match snapshot for "UnknownTab" tab', () => {
+    const { asFragment } = render(
+      <MainContent
+        currentTab='UnknownTab'
+        setCoverImage={() => {}}
+        coverImage={null}
+      />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
