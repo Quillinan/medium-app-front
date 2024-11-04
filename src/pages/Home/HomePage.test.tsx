@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import HomePage from './HomePage';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@auth/useAuth';
+import { Mock } from 'vitest';
 
 vi.mock('@auth/useAuth');
 vi.mock('react-router-dom', () => ({
@@ -13,8 +14,8 @@ describe('HomePage', () => {
   const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    (useAuth as jest.Mock).mockReturnValue({ removeAuth: mockRemoveAuth });
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+    (useAuth as Mock).mockReturnValue({ removeAuth: mockRemoveAuth });
+    (useNavigate as Mock).mockReturnValue(mockNavigate);
     sessionStorage.setItem('isAuthenticated', 'true');
   });
 

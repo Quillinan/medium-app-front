@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import Header from './Header';
 import Swal from 'sweetalert2';
 import { createPost } from '@services/CreatePost/CreatePost';
+import { Mock } from 'vitest';
 
 vi.mock('sweetalert2', () => ({
   default: {
@@ -35,8 +35,8 @@ describe('Header Component', () => {
     );
     sessionStorage.setItem('uniqueId', 'mock-userId');
     sessionStorage.setItem('name', 'mock-username');
-    (createPost as jest.Mock).mockResolvedValue(true);
-    (Swal.fire as jest.Mock).mockResolvedValue({ isConfirmed: true });
+    (createPost as Mock).mockResolvedValue(true);
+    (Swal.fire as Mock).mockResolvedValue({ isConfirmed: true });
 
     render(
       <Header

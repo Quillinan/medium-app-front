@@ -3,6 +3,7 @@ import { Post } from '@utils/Types/Types';
 import PostsContent from './PostsContent';
 import { getPosts } from '@services/GetPosts/GetPosts';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
+import { Mock } from 'vitest';
 
 vi.mock('@services/GetPosts/GetPosts', () => ({
   getPosts: vi.fn(),
@@ -40,7 +41,7 @@ describe('PostsContent', () => {
 
   it('should display a generic error message if fetching data fails', async () => {
     const errorMessage = 'Erro ao carregar os dados da API';
-    (getPosts as jest.Mock).mockRejectedValue(new Error('Erro no servidor'));
+    (getPosts as Mock).mockRejectedValue(new Error('Erro no servidor'));
 
     render(<PostsContent />);
 
@@ -51,8 +52,8 @@ describe('PostsContent', () => {
 
   it('should display an error message if fetching data fails', async () => {
     const errorMessage = 'Erro ao carregar os dados da API';
-    (getPosts as jest.Mock).mockRejectedValue(new Error(errorMessage));
-    (showLoading as jest.Mock).mockRejectedValue(new Error(errorMessage));
+    (getPosts as Mock).mockRejectedValue(new Error(errorMessage));
+    (showLoading as Mock).mockRejectedValue(new Error(errorMessage));
 
     render(<PostsContent />);
 
@@ -62,8 +63,8 @@ describe('PostsContent', () => {
   });
 
   it('should display post data when fetching is successful', async () => {
-    (getPosts as jest.Mock).mockResolvedValue(mockPosts);
-    (showLoading as jest.Mock).mockImplementation(promise => promise);
+    (getPosts as Mock).mockResolvedValue(mockPosts);
+    (showLoading as Mock).mockImplementation(promise => promise);
 
     await act(async () => {
       render(<PostsContent />);
@@ -82,8 +83,8 @@ describe('PostsContent', () => {
   });
 
   it('should display posts data sorted by date with the most recent first', async () => {
-    (getPosts as jest.Mock).mockResolvedValue(mockPosts);
-    (showLoading as jest.Mock).mockImplementation(promise => promise);
+    (getPosts as Mock).mockResolvedValue(mockPosts);
+    (showLoading as Mock).mockImplementation(promise => promise);
 
     await act(async () => {
       render(<PostsContent />);

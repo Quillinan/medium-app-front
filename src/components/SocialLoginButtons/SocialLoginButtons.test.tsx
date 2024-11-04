@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import SocialLoginButtons from './SocialLoginButtons';
 import { useMsal } from '@azure/msal-react';
 import { useAuth } from '@auth/useAuth';
+import { Mock } from 'vitest';
 
 vi.mock('@azure/msal-react', () => ({
   useMsal: vi.fn(),
@@ -18,13 +19,13 @@ describe('SocialLoginButtons', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (useMsal as jest.Mock).mockReturnValue({
+    (useMsal as Mock).mockReturnValue({
       instance: {
         loginPopup: mockLoginPopup,
       },
     });
 
-    (useAuth as jest.Mock).mockReturnValue({
+    (useAuth as Mock).mockReturnValue({
       setAuth: mockSetAuth,
     });
   });
@@ -52,7 +53,7 @@ describe('SocialLoginButtons', () => {
       scopes: ['user.read'],
     });
 
-    await screen.findByRole('button', { name: /Microsoft/i }); // Aguarda o botão aparecer novamente após o clique
+    await screen.findByRole('button', { name: /Microsoft/i });
 
     expect(mockSetAuth).toHaveBeenCalledWith(
       'mock-token',

@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import { showLoading } from './LoadingHelper';
+import { Mock } from 'vitest';
 
 vi.mock('sweetalert2', async () => {
   const original =
@@ -26,7 +27,7 @@ describe('showLoading', () => {
   it('should display the loading modal and close it when the promise resolves', async () => {
     const mockShowLoading = vi.fn();
 
-    (Swal.fire as jest.Mock).mockImplementation(({ didOpen }) => {
+    (Swal.fire as Mock).mockImplementation(({ didOpen }) => {
       if (didOpen) didOpen();
       return { showLoading: mockShowLoading };
     });

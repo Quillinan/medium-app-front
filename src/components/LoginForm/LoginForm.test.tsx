@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@auth/useAuth';
 import LoginForm from './LoginForm';
+import { Mock } from 'vitest';
 
 vi.mock('react-router-dom', () => ({
   useNavigate: vi.fn(),
@@ -18,8 +19,8 @@ describe('LoginForm', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-    (useAuth as jest.Mock).mockReturnValue({
+    (useNavigate as Mock).mockReturnValue(mockNavigate);
+    (useAuth as Mock).mockReturnValue({
       setAuth: mockSetAuth,
     });
   });
