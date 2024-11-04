@@ -1,5 +1,5 @@
 import handleError from '@errors/HandleError/HandleError';
-import { post, apiUrl } from '@services/Api/Api';
+import { apiUrl, postApi } from '@services/Api/Api';
 import { Post, ErrorResponse, CreatePostData } from '@utils/Types/Types';
 import { Mock } from 'vitest';
 import { createPost } from './CreatePost';
@@ -38,11 +38,11 @@ describe('createPost', () => {
       coverImageUrl: 'http://example.com/image.png',
     };
 
-    (post as Mock).mockResolvedValueOnce(mockResponse);
+    (postApi as Mock).mockResolvedValueOnce(mockResponse);
 
     const result = await createPost(postData);
     expect(result).toEqual(mockResponse);
-    expect(post).toHaveBeenCalledWith(
+    expect(postApi).toHaveBeenCalledWith(
       `${apiUrl}api/Post`,
       expect.any(FormData)
     );
@@ -58,7 +58,7 @@ describe('createPost', () => {
       details: null,
     };
 
-    (post as Mock).mockRejectedValueOnce(mockError);
+    (postApi as Mock).mockRejectedValueOnce(mockError);
     (handleError as Mock).mockReturnValueOnce(mockErrorResponse);
 
     const result = await createPost(postData);
@@ -83,12 +83,12 @@ describe('createPost', () => {
       coverImageUrl: '',
     };
 
-    (post as Mock).mockResolvedValueOnce(mockResponse);
+    (postApi as Mock).mockResolvedValueOnce(mockResponse);
 
     const result = await createPost(postDataWithoutImage);
     expect(result).toEqual(mockResponse);
 
-    const formDataArg = (post as Mock).mock.calls[0][1];
+    const formDataArg = (postApi as Mock).mock.calls[0][1];
     expect(formDataArg.has('CoverImageData')).toBe(false);
   });
 });

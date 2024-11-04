@@ -1,4 +1,4 @@
-import { get } from '@services/Api/Api';
+import { getApi } from '@services/Api/Api';
 import { ErrorResponse, Post } from '@utils/Types/Types';
 import { getPosts } from './GetPosts';
 
@@ -17,7 +17,7 @@ describe('getPosts', () => {
       details: null,
     };
 
-    vi.mocked(get).mockRejectedValueOnce({
+    vi.mocked(getApi).mockRejectedValueOnce({
       response: {
         status: 404,
         data: mockErrorResponse,
@@ -28,7 +28,7 @@ describe('getPosts', () => {
     const result = await getPosts();
 
     expect(result).toEqual(mockErrorResponse);
-    expect(get).toHaveBeenCalledWith('https://api.mock.com/api/Post');
+    expect(getApi).toHaveBeenCalledWith('https://api.mock.com/api/Post');
   });
 
   it('should return post data when API call is successful', async () => {
@@ -57,11 +57,11 @@ describe('getPosts', () => {
       },
     ];
 
-    vi.mocked(get).mockResolvedValue(mockPosts);
+    vi.mocked(getApi).mockResolvedValue(mockPosts);
 
     const result = await getPosts();
 
     expect(result).toEqual(mockPosts);
-    expect(get).toHaveBeenCalledWith('https://api.mock.com/api/Post');
+    expect(getApi).toHaveBeenCalledWith('https://api.mock.com/api/Post');
   });
 });

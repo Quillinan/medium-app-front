@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Post } from '@utils/Types/Types';
+import { AuthContext } from '@context/AuthContext/AuthContext';
 
 interface PostInfoContentProps {
   post: Post;
 }
 
 const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
+  const authContext = useContext(AuthContext);
+  const userId = authContext?.uniqueId;
   return (
     <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 mb-8 flex flex-col items-center'>
+      {userId === post.authorId && (
+        <div className='w-full flex justify-end space-x-4'>
+          <button className='bg-yellow-500 text-white rounded px-4 py-1'>
+            Editar
+          </button>
+          <button className='bg-red-500 text-white rounded px-4 py-1'>
+            Apagar
+          </button>
+        </div>
+      )}
       <div className='w-2/4'>
         <h1 className='text-3xl font-bold mb-3'>{post.title}</h1>
         <h2 className='text-xl text-gray-700 mb-2'>{post.subtitle}</h2>
@@ -26,7 +39,7 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
         </div>
       )}
       <div
-        className='mt-4 text-center w-2/4'
+        className='mt-4  w-2/4'
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </div>

@@ -1,5 +1,5 @@
 import handleError from '@errors/HandleError/HandleError';
-import { apiUrl, post } from '@services/Api/Api';
+import { apiUrl, postApi } from '@services/Api/Api';
 import { Post, ErrorResponse, CreatePostData } from '@utils/Types/Types';
 
 export const createPost = async (
@@ -19,7 +19,7 @@ export const createPost = async (
   }
 
   try {
-    const response = await post(url, formData);
+    const response = await postApi(url, formData);
     return response as Post;
   } catch (error: any) {
     return handleError(error);

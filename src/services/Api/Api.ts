@@ -11,7 +11,7 @@ export const codeSystem = import.meta.env.VITE_API_SYSTEM;
 
 export const codeSentenceBirth = import.meta.env.VITE_API_SENTENCE_BIRTHDAYS;
 
-export const get = async (
+export const getApi = async (
   url: string
 ): Promise<object | ErrorResponse | undefined> => {
   try {
@@ -23,7 +23,7 @@ export const get = async (
   }
 };
 
-export const post = async (
+export const postApi = async (
   url: string,
   body: FormData
 ): Promise<object | ErrorResponse | undefined> => {

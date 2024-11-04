@@ -1,5 +1,5 @@
 import handleError from '@errors/HandleError/HandleError';
-import { apiUrl, get } from '@services/Api/Api';
+import { apiUrl, getApi } from '@services/Api/Api';
 import { Post, ErrorResponse } from '@utils/Types/Types';
 
 export const getPosts = async (): Promise<
@@ -7,7 +7,7 @@ export const getPosts = async (): Promise<
 > => {
   const url = `${apiUrl}api/Post`;
   try {
-    const response = await get(url);
+    const response = await getApi(url);
     return response as Post[];
   } catch (error: any) {
     return handleError(error);
