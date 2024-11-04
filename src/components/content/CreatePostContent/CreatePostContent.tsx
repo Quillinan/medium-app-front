@@ -57,7 +57,7 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
   return (
     <div
       data-testid='create-post-content'
-      className='flex flex-col h-full p-4 space-y-4 w-1/2'
+      className='flex flex-col h-full p-4 space-y-4 w-1/2 mt-6'
     >
       <TitleInput title={title} onTitleChange={setTitle} />
       <SubtitleInput subtitle={subtitle} onSubtitleChange={setSubtitle} />

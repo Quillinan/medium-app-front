@@ -2,9 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Post, ErrorResponse } from '@utils/Types/Types';
 import { getPosts } from '@services/GetPosts/GetPosts';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
-import PostContentList from '@components/PostContentList/PostContentList';
+import PostListContent from '@components/PostListContent/PostListContent';
 
-const PostsContent: React.FC = () => {
+interface PostsContentProps {
+  onPostSelect: (post: Post) => void; // Nova prop para selecionar um post
+}
+
+const PostsContent: React.FC<PostsContentProps> = ({ onPostSelect }) => {
   const [data, setData] = useState<Post[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,9 +34,13 @@ const PostsContent: React.FC = () => {
   return (
     <div
       data-testid='posts-content'
-      className='flex items-center justify-center h-full mt-4'
+      className='flex items-center justify-center h-full mt-9'
     >
-      {error ? <p>{error}</p> : <PostContentList data={data} />}
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <PostListContent data={data} onPostSelect={onPostSelect} /> // Passando a função de seleção
+      )}
     </div>
   );
 };

@@ -1,17 +1,22 @@
 import { Post } from '@utils/Types/Types';
 
-interface PostContentListProps {
+interface PostListContentProps {
   data: Post[];
+  onPostSelect: (post: Post) => void; // Nova prop para selecionar um post
 }
 
-const PostContentList: React.FC<PostContentListProps> = ({ data = [] }) => {
+const PostListContent: React.FC<PostListContentProps> = ({
+  data = [],
+  onPostSelect,
+}) => {
   return (
     <div className='space-y-8'>
       {Array.isArray(data) && data.length > 0 ? (
         data.map(post => (
           <div
             key={post.id}
-            className='flex flex-col md:flex-row border-b border-gray-200 pb-8'
+            className='flex flex-col md:flex-row border-b border-gray-200 pb-8 cursor-pointer' // Adicionando cursor de ponteiro
+            onClick={() => onPostSelect(post)} // Chamando a função ao clicar
           >
             <div className='flex-1 pr-4'>
               <h2 className='mt-1 text-2xl font-semibold text-gray-900'>
@@ -36,7 +41,7 @@ const PostContentList: React.FC<PostContentListProps> = ({ data = [] }) => {
                 <img
                   src={post.coverImageUrl}
                   alt={post.title}
-                  className='h-40 object-cover'
+                  className='h-40 w-40 object-cover'
                 />
               </div>
             )}
@@ -49,4 +54,4 @@ const PostContentList: React.FC<PostContentListProps> = ({ data = [] }) => {
   );
 };
 
-export default PostContentList;
+export default PostListContent;

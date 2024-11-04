@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import PostContentList from './PostContentList';
+import PostContentList from './PostListContent';
 import { Post } from '@utils/Types/Types';
 
 describe('PostContentList', () => {

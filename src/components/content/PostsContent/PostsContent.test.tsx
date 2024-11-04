@@ -1,9 +1,9 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { Post } from '@utils/Types/Types';
-import PostsContent from './PostsContent';
 import { getPosts } from '@services/GetPosts/GetPosts';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 import { Mock } from 'vitest';
+import PostsContent from './PostsContent';
 
 vi.mock('@services/GetPosts/GetPosts', () => ({
   getPosts: vi.fn(),
