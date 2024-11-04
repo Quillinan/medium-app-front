@@ -6,7 +6,7 @@ exports[`PostContentList > should match snapshot 1`] = `
     class="space-y-8"
   >
     <div
-      class="flex flex-col md:flex-row border-b border-gray-200 pb-8"
+      class="flex flex-col md:flex-row border-b border-gray-200 pb-8 cursor-pointer"
     >
       <div
         class="flex-1 pr-4"
@@ -29,7 +29,7 @@ exports[`PostContentList > should match snapshot 1`] = `
         <p
           class="mt-1 text-sm text-gray-500"
         >
-          Autor: Author One
+          Autor : Author One
         </p>
       </div>
       <div
@@ -37,13 +37,13 @@ exports[`PostContentList > should match snapshot 1`] = `
       >
         <img
           alt="First Post"
-          class="h-40 object-cover"
+          class="h-40 w-40 object-cover"
           src="http://example.com/image1.jpg"
         />
       </div>
     </div>
     <div
-      class="flex flex-col md:flex-row border-b border-gray-200 pb-8"
+      class="flex flex-col md:flex-row border-b border-gray-200 pb-8 cursor-pointer"
     >
       <div
         class="flex-1 pr-4"
@@ -66,7 +66,7 @@ exports[`PostContentList > should match snapshot 1`] = `
         <p
           class="mt-1 text-sm text-gray-500"
         >
-          Autor: Author Two
+          Autor : Author Two
         </p>
       </div>
       <div
@@ -74,7 +74,7 @@ exports[`PostContentList > should match snapshot 1`] = `
       >
         <img
           alt="Second Post"
-          class="h-40 object-cover"
+          class="h-40 w-40 object-cover"
           src="http://example.com/image2.jpg"
         />
       </div>

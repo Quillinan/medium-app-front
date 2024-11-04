@@ -33,7 +33,7 @@ const PostListContent: React.FC<PostListContentProps> = ({
                 })}{' '}
               </p>
               <p className='mt-1 text-sm text-gray-500'>
-                Autor: {post.authorName}
+                Autor : {post.authorName}
               </p>
             </div>
             {post.coverImageUrl && (

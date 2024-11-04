@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import PostContentList from './PostListContent';
 import { Post } from '@utils/Types/Types';
+import PostListContent from './PostListContent';
 
 describe('PostContentList', () => {
   const mockPosts: Post[] = [
@@ -28,29 +28,35 @@ describe('PostContentList', () => {
     },
   ];
 
+  const mockOnPostSelect = vi.fn();
+
   it('should render nothing if there are no posts', () => {
-    render(<PostContentList data={[]} />);
+    render(<PostListContent data={[]} onPostSelect={mockOnPostSelect} />);
 
     expect(screen.queryByText('First Post')).not.toBeInTheDocument();
     expect(screen.queryByText('Second Post')).not.toBeInTheDocument();
   });
 
   it('should render the list of posts', () => {
-    render(<PostContentList data={mockPosts} />);
+    render(
+      <PostListContent data={mockPosts} onPostSelect={mockOnPostSelect} />
+    );
 
     expect(screen.getByText('First Post')).toBeInTheDocument();
     expect(screen.getByText('Subtitle of First Post')).toBeInTheDocument();
     expect(screen.getByText('Criado em: 29/10/2024')).toBeInTheDocument();
-    expect(screen.getByText('Autor: Author One')).toBeInTheDocument();
+    expect(screen.getByText('Autor : Author One')).toBeInTheDocument();
 
     expect(screen.getByText('Second Post')).toBeInTheDocument();
     expect(screen.getByText('Subtitle of Second Post')).toBeInTheDocument();
     expect(screen.getByText('Criado em: 28/10/2024')).toBeInTheDocument();
-    expect(screen.getByText('Autor: Author Two')).toBeInTheDocument();
+    expect(screen.getByText('Autor : Author Two')).toBeInTheDocument();
   });
 
   it('should match snapshot', () => {
-    const { asFragment } = render(<PostContentList data={mockPosts} />);
+    const { asFragment } = render(
+      <PostListContent data={mockPosts} onPostSelect={mockOnPostSelect} />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
