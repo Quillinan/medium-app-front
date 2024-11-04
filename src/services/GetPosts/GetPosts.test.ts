@@ -38,10 +38,11 @@ describe('getPosts', () => {
         title: 'First Post',
         subtitle: 'Subtitle of First Post',
         content: 'This is the content of the first post.',
-        createdAt: new Date('2024-10-29T00:00:00Z'),
-        updatedAt: new Date('2024-10-29T00:00:00Z'),
+        createdAt: new Date('2024-10-28T00:00:00Z'),
+        updatedAt: new Date('2024-10-28T00:00:00Z'),
         authorId: '123',
         authorName: 'Author One',
+        coverImageUrl: 'http://example.com/image1.jpg',
       },
       {
         id: 2,
@@ -52,6 +53,7 @@ describe('getPosts', () => {
         updatedAt: new Date('2024-10-29T00:00:00Z'),
         authorId: '456',
         authorName: 'Author Two',
+        coverImageUrl: 'http://example.com/image2.jpg',
       },
     ];
 
