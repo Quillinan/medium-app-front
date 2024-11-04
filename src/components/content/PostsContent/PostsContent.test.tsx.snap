@@ -8,7 +8,11 @@ exports[`PostsContent > should match snapshot 1`] = `
   >
     <div
       class="space-y-8"
-    />
+    >
+      <p>
+        Nenhum post encontrado.
+      </p>
+    </div>
   </div>
 </DocumentFragment>
 `;

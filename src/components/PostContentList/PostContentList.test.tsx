@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import PostContentList from './PostContent';
+import PostContentList from './PostContentList';
 import { Post } from '@utils/Types/Types';
 
 describe('PostContentList', () => {
@@ -13,6 +13,7 @@ describe('PostContentList', () => {
       updatedAt: new Date('2024-10-29T00:00:00Z'),
       authorId: '123',
       authorName: 'Author One',
+      coverImageUrl: 'http://example.com/image1.jpg',
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ describe('PostContentList', () => {
       updatedAt: new Date('2024-10-28T00:00:00Z'),
       authorId: '456',
       authorName: 'Author Two',
+      coverImageUrl: 'http://example.com/image2.jpg',
     },
   ];
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Post, ErrorResponse } from '@utils/Types/Types';
 import { getPosts } from '@services/GetPosts/GetPosts';
-import PostContentList from '@components/PostContentList/PostContent';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
+import PostContentList from '@components/PostContentList/PostContentList';
 
 const PostsContent: React.FC = () => {
   const [data, setData] = useState<Post[]>([]);

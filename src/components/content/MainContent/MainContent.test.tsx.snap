@@ -12,7 +12,11 @@ exports[`MainContent > should match snapshot for "UnknownTab" tab 1`] = `
     >
       <div
         class="space-y-8"
-      />
+      >
+        <p>
+          Nenhum post encontrado.
+        </p>
+      </div>
     </div>
   </main>
 </DocumentFragment>

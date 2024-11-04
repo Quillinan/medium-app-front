@@ -32,6 +32,15 @@ exports[`PostContentList > should match snapshot 1`] = `
           Autor: Author One
         </p>
       </div>
+      <div
+        class="flex-shrink-0 mt-4 md:mt-0"
+      >
+        <img
+          alt="First Post"
+          class="h-40 object-cover"
+          src="http://example.com/image1.jpg"
+        />
+      </div>
     </div>
     <div
       class="flex flex-col md:flex-row border-b border-gray-200 pb-8"
@@ -59,6 +68,15 @@ exports[`PostContentList > should match snapshot 1`] = `
         >
           Autor: Author Two
         </p>
+      </div>
+      <div
+        class="flex-shrink-0 mt-4 md:mt-0"
+      >
+        <img
+          alt="Second Post"
+          class="h-40 object-cover"
+          src="http://example.com/image2.jpg"
+        />
       </div>
     </div>
   </div>
