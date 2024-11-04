@@ -5,7 +5,7 @@ import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 import PostListContent from '@components/PostListContent/PostListContent';
 
 interface PostsContentProps {
-  onPostSelect: (post: Post) => void; // Nova prop para selecionar um post
+  onPostSelect: (post: Post) => void;
 }
 
 const PostsContent: React.FC<PostsContentProps> = ({ onPostSelect }) => {
@@ -39,7 +39,7 @@ const PostsContent: React.FC<PostsContentProps> = ({ onPostSelect }) => {
       {error ? (
         <p>{error}</p>
       ) : (
-        <PostListContent data={data} onPostSelect={onPostSelect} /> // Passando a função de seleção
+        <PostListContent data={data} onPostSelect={onPostSelect} />
       )}
     </div>
   );

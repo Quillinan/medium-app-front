@@ -2,7 +2,7 @@ import { Post } from '@utils/Types/Types';
 
 interface PostListContentProps {
   data: Post[];
-  onPostSelect: (post: Post) => void; // Nova prop para selecionar um post
+  onPostSelect: (post: Post) => void;
 }
 
 const PostListContent: React.FC<PostListContentProps> = ({
@@ -16,7 +16,7 @@ const PostListContent: React.FC<PostListContentProps> = ({
           <div
             key={post.id}
             className='flex flex-col md:flex-row border-b border-gray-200 pb-8 cursor-pointer' // Adicionando cursor de ponteiro
-            onClick={() => onPostSelect(post)} // Chamando a função ao clicar
+            onClick={() => onPostSelect(post)}
           >
             <div className='flex-1 pr-4'>
               <h2 className='mt-1 text-2xl font-semibold text-gray-900'>
