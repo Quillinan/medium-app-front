@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TitleInput > should render the component correctly 1`] = `
+<DocumentFragment>
+  <input
+    class="mb-2 border rounded p-2"
+    data-testid="title-input"
+    placeholder="Título"
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;
