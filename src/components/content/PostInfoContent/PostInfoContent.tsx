@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Post } from '@utils/Types/Types';
 import { AuthContext } from '@context/AuthContext/AuthContext';
+import DeleteButton from '@components/DeleteButton/DeleteButton';
 
 interface PostInfoContentProps {
   post: Post;
@@ -16,9 +17,7 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
           <button className='bg-yellow-500 text-white rounded px-4 py-1'>
             Editar
           </button>
-          <button className='bg-red-500 text-white rounded px-4 py-1'>
-            Apagar
-          </button>
+          <DeleteButton postId={String(post.id)} onDeleteSuccess={() => {}} />
         </div>
       )}
       <div className='w-2/4'>

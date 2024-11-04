@@ -40,6 +40,24 @@ export const postApi = async (
   }
 };
 
+export const deleteApi = async (
+  url: string,
+  body?: object
+): Promise<object | ErrorResponse | undefined> => {
+  try {
+    const response: AxiosResponse = await axios.delete(url, {
+      data: body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const errorResponse = handleError(error as AxiosError);
+    return errorResponse;
+  }
+};
+
 export const getTotvs = async (
   url: string
 ): Promise<object | ErrorResponse | undefined> => {
