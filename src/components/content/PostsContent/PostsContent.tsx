@@ -3,6 +3,7 @@ import { Post, ErrorResponse } from '@utils/Types/Types';
 import { getPosts } from '@services/GetPosts/GetPosts';
 import { showLoading } from '@utils/LoadingHelper/LoadingHelper';
 import PostListContent from '@components/PostListContent/PostListContent';
+import Swal from 'sweetalert2';
 
 interface PostsContentProps {
   onPostSelect: (post: Post) => void;
@@ -11,6 +12,7 @@ interface PostsContentProps {
 const PostsContent: React.FC<PostsContentProps> = ({ onPostSelect }) => {
   const [data, setData] = useState<Post[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [alertShown, setAlertShown] = useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -18,14 +20,23 @@ const PostsContent: React.FC<PostsContentProps> = ({ onPostSelect }) => {
 
       if ((response as ErrorResponse).code) {
         setError((response as ErrorResponse).message || 'Erro desconhecido');
+        if (!alertShown) {
+          Swal.fire({
+            title: 'Erro',
+            text: (response as ErrorResponse).message || 'Erro desconhecido',
+            icon: 'error',
+          });
+          setAlertShown(true);
+        }
       } else {
         setData(response as Post[]);
+        setAlertShown(false);
       }
     } catch (error) {
       setError('Erro ao carregar os dados da API');
       console.error(error);
     }
-  }, []);
+  }, [alertShown]);
 
   useEffect(() => {
     fetchData();
