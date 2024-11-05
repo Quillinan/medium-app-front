@@ -27,9 +27,15 @@ const msalInstance = new PublicClientApplication({
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [uniqueId, setUniqueId] = useState<string | null>(null);
-  const [name, setName] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(
+    sessionStorage.getItem('authToken')
+  );
+  const [uniqueId, setUniqueId] = useState<string | null>(
+    sessionStorage.getItem('uniqueId')
+  );
+  const [name, setName] = useState<string | null>(
+    sessionStorage.getItem('name')
+  );
 
   const setAuth = (
     authToken: string | null,

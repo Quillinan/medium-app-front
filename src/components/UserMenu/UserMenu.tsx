@@ -1,5 +1,5 @@
 import { useAuth } from '@auth/useAuth';
-import IconButton from '@components/IconButton/IconButton';
+import IconButton from '@components/buttons/IconButton/IconButton';
 import { useNavigate } from 'react-router-dom';
 
 const UserMenu: React.FC = () => {

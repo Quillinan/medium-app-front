@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import LoginPage from './LoginPage';
-import LoginForm from '@components/LoginForm/LoginForm';
-import SocialLoginButtons from '@components/SocialLoginButtons/SocialLoginButtons';
+import LoginForm from '@components/forms/LoginForm/LoginForm';
+import SocialLoginButtons from '@components/buttons/SocialLoginButtons/SocialLoginButtons';
 
 vi.mock('@components/LoginForm/LoginForm', () => ({
   default: vi.fn(() => <div>Mocked LoginForm</div>),

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Post } from '@utils/Types/Types';
 import { AuthContext } from '@context/AuthContext/AuthContext';
-import DeleteButton from '@components/DeleteButton/DeleteButton';
+import DeleteButton from '@components/buttons/DeleteButton/DeleteButton';
 
 interface PostInfoContentProps {
   post: Post;

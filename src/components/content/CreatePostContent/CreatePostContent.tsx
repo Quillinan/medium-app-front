@@ -1,6 +1,6 @@
-import ImageDropzone from '@components/ImageDropzone/ImageDropzone';
-import SubtitleInput from '@components/SubtitleInput/SubtitleInput';
-import TitleInput from '@components/TitleInput/TitleInput';
+import ImageDropzone from '@components/forms/ImageDropzone/ImageDropzone';
+import SubtitleInput from '@components/forms/SubtitleInput/SubtitleInput';
+import TitleInput from '@components/forms/TitleInput/TitleInput';
 import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';

@@ -1,7 +1,6 @@
 import { deletePost } from '@services/DeletePost/DeletePost';
 import React from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 
 interface DeleteButtonProps {
   postId: string;
@@ -12,8 +11,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
   postId,
   onDeleteSuccess,
 }) => {
-  const navigate = useNavigate();
-
   const handleDelete = async () => {
     const confirmation = await Swal.fire({
       title: 'Tem certeza?',
@@ -34,7 +31,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
           icon: 'success',
         }).then(() => {
           onDeleteSuccess();
-          navigate('/');
+          window.location.reload();
         });
       } else {
         console.error('Erro ao excluir o post:', result);
