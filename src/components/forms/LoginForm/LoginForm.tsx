@@ -11,8 +11,8 @@ const LoginForm: React.FC = () => {
   const auth = sessionStorage.getItem('isAuthenticated');
 
   const login = useCallback(
-    (auth: string | null) => {
-      if (auth) {
+    (authToken: string | null) => {
+      if (authToken) {
         setError('');
         navigate('/home');
       }
@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
     const validPassword = '1234';
 
     if (email === validEmail && password === validPassword) {
-      setAuth(null);
+      setAuth(null, null, null);
       login('true');
     } else {
       setError('Usuário ou senha incorretos');

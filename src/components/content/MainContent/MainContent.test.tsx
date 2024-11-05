@@ -8,6 +8,8 @@ describe('MainContent', () => {
         currentTab='UnknownTab'
         setCoverImage={() => {}}
         coverImage={null}
+        selectedPost={null}
+        setSelectedPost={() => {}}
       />
     );
     const defaultContent = screen.getByTestId('posts-content');
@@ -15,7 +17,13 @@ describe('MainContent', () => {
   });
   it('should render PostsContent by default when no currentTab is provided', () => {
     render(
-      <MainContent currentTab='' setCoverImage={() => {}} coverImage={null} />
+      <MainContent
+        currentTab=''
+        setCoverImage={() => {}}
+        coverImage={null}
+        selectedPost={null}
+        setSelectedPost={() => {}}
+      />
     );
     const defaultContent = screen.getByTestId('posts-content');
     expect(defaultContent).toBeInTheDocument();
@@ -26,6 +34,8 @@ describe('MainContent', () => {
         currentTab='Criar Post'
         setCoverImage={() => {}}
         coverImage={null}
+        selectedPost={null}
+        setSelectedPost={() => {}}
       />
     );
     const createPostContent = screen.getByTestId('create-post-content');
@@ -38,6 +48,8 @@ describe('MainContent', () => {
         currentTab='Aniversários'
         setCoverImage={() => {}}
         coverImage={null}
+        selectedPost={null}
+        setSelectedPost={() => {}}
       />
     );
     const birthdayContent = screen.getByTestId('birthday-content');
@@ -50,6 +62,8 @@ describe('MainContent', () => {
         currentTab='UnknownTab'
         setCoverImage={() => {}}
         coverImage={null}
+        selectedPost={null}
+        setSelectedPost={() => {}}
       />
     );
     expect(asFragment()).toMatchSnapshot();

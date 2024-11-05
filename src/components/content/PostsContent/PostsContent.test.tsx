@@ -14,6 +14,8 @@ vi.mock('@utils/LoadingHelper/LoadingHelper', () => ({
 }));
 
 describe('PostsContent', () => {
+  const mockOnPostSelect = vi.fn();
+
   const mockPosts: Post[] = [
     {
       id: 1,
@@ -43,7 +45,7 @@ describe('PostsContent', () => {
     const errorMessage = 'Erro ao carregar os dados da API';
     (getPosts as Mock).mockRejectedValue(new Error('Erro no servidor'));
 
-    render(<PostsContent />);
+    render(<PostsContent onPostSelect={mockOnPostSelect} />);
 
     expect(showLoading).toHaveBeenCalled();
     const error = await screen.findByText(errorMessage);
@@ -55,7 +57,7 @@ describe('PostsContent', () => {
     (getPosts as Mock).mockRejectedValue(new Error(errorMessage));
     (showLoading as Mock).mockRejectedValue(new Error(errorMessage));
 
-    render(<PostsContent />);
+    render(<PostsContent onPostSelect={mockOnPostSelect} />);
 
     expect(showLoading).toHaveBeenCalled();
     const error = await screen.findByText(errorMessage);
@@ -67,7 +69,7 @@ describe('PostsContent', () => {
     (showLoading as Mock).mockImplementation(promise => promise);
 
     await act(async () => {
-      render(<PostsContent />);
+      render(<PostsContent onPostSelect={mockOnPostSelect} />);
     });
 
     expect(showLoading).toHaveBeenCalled();
@@ -87,7 +89,7 @@ describe('PostsContent', () => {
     (showLoading as Mock).mockImplementation(promise => promise);
 
     await act(async () => {
-      render(<PostsContent />);
+      render(<PostsContent onPostSelect={mockOnPostSelect} />);
     });
 
     expect(showLoading).toHaveBeenCalled();
@@ -106,7 +108,10 @@ describe('PostsContent', () => {
   });
 
   it('should match snapshot', () => {
-    const { asFragment } = render(<PostsContent />);
+    const { asFragment } = render(
+      <PostsContent onPostSelect={mockOnPostSelect} />
+    );
+
     expect(asFragment()).toMatchSnapshot();
   });
 });

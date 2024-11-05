@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import handleError from '@errors/HandleError/HandleError';
 import { ErrorResponse } from '@utils/Types/Types';
-import { get, getTotvs, post } from './Api';
+import { getApi, getTotvs, postApi } from './Api';
 
 vi.mock('axios');
 
@@ -101,7 +101,7 @@ describe('API Utility Functions', () => {
       (axios.get as Mock).mockRejectedValueOnce(mockError);
       (handleError as Mock).mockReturnValue(errorResponseMock);
 
-      const result = await get(url);
+      const result = await getApi(url);
 
       expect(result).toEqual(errorResponseMock);
       expect(handleError).toHaveBeenCalledWith(mockError);
@@ -112,7 +112,7 @@ describe('API Utility Functions', () => {
 
       (axios.get as Mock).mockResolvedValueOnce({ data: mockData });
 
-      const result = await get(url);
+      const result = await getApi(url);
 
       expect(result).toEqual(mockData);
       expect(axios.get).toHaveBeenCalledWith(url);
@@ -157,7 +157,7 @@ describe('API Utility Functions', () => {
       (axios.post as Mock).mockRejectedValueOnce(mockError);
       (handleError as Mock).mockReturnValue(errorResponseMock);
 
-      const result = await post(postUrl, formData);
+      const result = await postApi(postUrl, formData);
 
       expect(result).toEqual(errorResponseMock);
       expect(handleError).toHaveBeenCalledWith(mockError);
@@ -168,7 +168,7 @@ describe('API Utility Functions', () => {
 
       (axios.post as Mock).mockResolvedValueOnce({ data: mockData });
 
-      const result = await post(postUrl, formData);
+      const result = await postApi(postUrl, formData);
 
       expect(result).toEqual(mockData);
       expect(axios.post).toHaveBeenCalledWith(postUrl, formData, {
