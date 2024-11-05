@@ -40,6 +40,23 @@ export const postApi = async (
   }
 };
 
+export const putApi = async (
+  url: string,
+  body: FormData
+): Promise<object | ErrorResponse | undefined> => {
+  try {
+    const response: AxiosResponse = await axios.put(url, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const errorResponse = handleError(error as AxiosError);
+    return errorResponse;
+  }
+};
+
 export const deleteApi = async (
   url: string,
   body?: object

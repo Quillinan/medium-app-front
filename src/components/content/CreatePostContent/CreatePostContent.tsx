@@ -1,57 +1,65 @@
-import ImageDropzone from '@components/forms/ImageDropzone/ImageDropzone';
-import SubtitleInput from '@components/forms/SubtitleInput/SubtitleInput';
-import TitleInput from '@components/forms/TitleInput/TitleInput';
 import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import TitleInput from '@components/forms/TitleInput/TitleInput';
+import SubtitleInput from '@components/forms/SubtitleInput/SubtitleInput';
+import ImageDropzone from '@components/forms/ImageDropzone/ImageDropzone';
 
 interface CreatePostContentProps {
   setCoverImage: (file: File | null) => void;
   coverImage: File | null;
+  initialPostData?: {
+    title: string;
+    subtitle: string;
+    content: string;
+    coverImageUrl?: string;
+  };
+  isEditing?: boolean;
 }
 
 const CreatePostContent: React.FC<CreatePostContentProps> = ({
   setCoverImage,
   coverImage,
+  initialPostData,
+  isEditing = false,
 }) => {
-  const [title, setTitle] = useState('');
-  const [subtitle, setSubtitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState(initialPostData?.title || '');
+  const [subtitle, setSubtitle] = useState(initialPostData?.subtitle || '');
+  const [content, setContent] = useState(initialPostData?.content || '');
+  const [initialCoverImageUrl, setInitialCoverImageUrl] = useState<
+    string | undefined
+  >(initialPostData?.coverImageUrl);
+
   const quillRef = useRef<ReactQuill>(null);
 
-  const saveDraft = () => {
-    const draft = { title, subtitle, content };
-    localStorage.setItem('draftPost', JSON.stringify(draft));
-  };
-
-  const loadDraft = () => {
-    const draft = JSON.parse(localStorage.getItem('draftPost') || '{}');
-    if (draft) {
-      setTitle(draft.title || '');
-      setSubtitle(draft.subtitle || '');
-      setContent(draft.content || '');
+  useEffect(() => {
+    if (!isEditing) {
+      const draft = JSON.parse(localStorage.getItem('draftPost') || '{}');
+      if (draft) {
+        setTitle(draft.title || '');
+        setSubtitle(draft.subtitle || '');
+        setContent(draft.content || '');
+      }
     }
-  };
+  }, [isEditing]);
 
   useEffect(() => {
-    loadDraft();
-  }, []);
-
-  useEffect(() => {
-    if (title || subtitle || content) {
-      saveDraft();
+    if (!isEditing && (title || subtitle || content)) {
+      const draft = { title, subtitle, content };
+      localStorage.setItem('draftPost', JSON.stringify(draft));
     }
-  }, [title, subtitle, content]);
+  }, [title, subtitle, content, isEditing]);
 
   useEffect(() => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       editor.root.style.minHeight = '200px';
     }
-  }, [quillRef.current]);
+  }, []);
 
   const handleImageUpload = (image: File) => {
     setCoverImage(image);
+    setInitialCoverImageUrl(undefined);
   };
 
   return (
@@ -64,8 +72,12 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
       <ReactQuill ref={quillRef} value={content} onChange={setContent} />
       <ImageDropzone
         coverImage={coverImage}
+        initialCoverImageUrl={initialCoverImageUrl}
         onImageUpload={handleImageUpload}
-        onImageRemove={() => setCoverImage(null)}
+        onImageRemove={() => {
+          setCoverImage(null);
+          setInitialCoverImageUrl(undefined);
+        }}
       />
     </div>
   );

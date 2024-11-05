@@ -47,3 +47,10 @@ export interface CreatePostData {
   authorName: string;
   coverImage?: File | null;
 }
+
+export interface EditPostData {
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  coverImage?: File | null;
+}

@@ -3,24 +3,30 @@ import { useEffect, useState } from 'react';
 
 interface ImageDropzoneProps {
   coverImage: File | null;
+  initialCoverImageUrl?: string;
   onImageUpload: (file: File) => void;
   onImageRemove: () => void;
 }
 
 const ImageDropzone: React.FC<ImageDropzoneProps> = ({
   coverImage,
+  initialCoverImageUrl,
   onImageUpload,
   onImageRemove,
 }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(
+    initialCoverImageUrl || null
+  );
 
   useEffect(() => {
     if (coverImage) {
       const url = URL.createObjectURL(coverImage);
       setImageUrl(url);
       return () => URL.revokeObjectURL(url);
+    } else if (initialCoverImageUrl) {
+      setImageUrl(initialCoverImageUrl);
     }
-  }, [coverImage]);
+  }, [coverImage, initialCoverImageUrl]);
 
   const onDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -37,7 +43,7 @@ const ImageDropzone: React.FC<ImageDropzoneProps> = ({
   return (
     <div
       {...getRootProps()}
-      className='border-dashed border-2 border-gray-400 p-4 mb-4 text-center'
+      className='border-dashed border-2 border-gray-400 p-4 mb-4 text-center cursor-pointer'
     >
       <input {...getInputProps()} />
       <p>
@@ -45,17 +51,14 @@ const ImageDropzone: React.FC<ImageDropzoneProps> = ({
           ? 'Clique para alterar a imagem de capa'
           : 'Arraste ou clique para adicionar uma imagem de capa'}
       </p>
-      {coverImage && (
+      {imageUrl && (
         <div className='relative mb-4'>
-          <img
-            src={imageUrl || ''}
-            alt='Capa do post'
-            className='w-full h-auto'
-          />
+          <img src={imageUrl} alt='Capa do post' className='w-full h-auto' />
           <button
             onClick={e => {
               e.stopPropagation();
               onImageRemove();
+              setImageUrl(null);
             }}
             className='absolute top-2 right-2 bg-red-500 text-white p-1 rounded'
           >
