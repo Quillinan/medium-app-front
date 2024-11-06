@@ -6,7 +6,7 @@ import { createPost } from './CreatePost';
 
 vi.mock('@services/Api/Api', () => ({
   apiUrl: 'https://api.mock.com/',
-  post: vi.fn(),
+  postApi: vi.fn(),
 }));
 vi.mock('@errors/HandleError/HandleError', () => ({
   default: vi.fn(),

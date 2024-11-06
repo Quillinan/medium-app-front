@@ -15,9 +15,9 @@ interface CreatePostContentProps {
     coverImageUrl?: string;
   };
   isEditing?: boolean;
-  onTitleChange: (newTitle: string) => void; // Adicionado
-  onSubtitleChange: (newSubtitle: string) => void; // Adicionado
-  onContentChange: (newContent: string) => void; // Adicionado
+  onTitleChange: (newTitle: string) => void;
+  onSubtitleChange: (newSubtitle: string) => void;
+  onContentChange: (newContent: string) => void;
 }
 
 const CreatePostContent: React.FC<CreatePostContentProps> = ({
@@ -77,14 +77,14 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
         title={title}
         onTitleChange={newTitle => {
           setTitle(newTitle);
-          onTitleChange(newTitle); // Chama a função passada por prop
+          onTitleChange(newTitle);
         }}
       />
       <SubtitleInput
         subtitle={subtitle}
         onSubtitleChange={newSubtitle => {
           setSubtitle(newSubtitle);
-          onSubtitleChange(newSubtitle); // Chama a função passada por prop
+          onSubtitleChange(newSubtitle);
         }}
       />
       <ReactQuill
@@ -92,7 +92,7 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
         value={content}
         onChange={newContent => {
           setContent(newContent);
-          onContentChange(newContent); // Chama a função passada por prop
+          onContentChange(newContent);
         }}
       />
       <ImageDropzone

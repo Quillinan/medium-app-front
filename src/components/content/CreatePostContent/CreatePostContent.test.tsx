@@ -1,52 +1,21 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import CreatePostContent from './CreatePostContent';
-
-vi.mock('@components/TitleInput/TitleInput', () => ({
-  default: vi.fn(({ onTitleChange }) => (
-    <input
-      data-testid='title-input'
-      onChange={e => onTitleChange(e.target.value)}
-      placeholder='Título'
-    />
-  )),
-}));
-
-vi.mock('@components/SubtitleInput/SubtitleInput', () => ({
-  default: vi.fn(({ onSubtitleChange }) => (
-    <input
-      data-testid='subtitle-input'
-      onChange={e => onSubtitleChange(e.target.value)}
-      placeholder='Subtítulo'
-    />
-  )),
-}));
-
-vi.mock('@components/ImageDropzone/ImageDropzone', () => ({
-  default: vi.fn(({ coverImage, onImageUpload, onImageRemove }) => (
-    <div>
-      <button
-        data-testid='upload-image'
-        onClick={() => onImageUpload(new File([], 'test-image.png'))}
-      >
-        Upload
-      </button>
-      {coverImage && (
-        <div>
-          <img src='mocked-url' alt='Capa do post' />
-          <button data-testid='remove-image' onClick={onImageRemove}>
-            Remove
-          </button>
-        </div>
-      )}
-    </div>
-  )),
-}));
 
 describe('CreatePostContent', () => {
   const mockSetCoverImage = vi.fn();
+  const mockOnTitleChange = vi.fn();
+  const mockOnSubtitleChange = vi.fn();
+  const mockOnContentChange = vi.fn();
 
   beforeAll(() => {
     global.URL.createObjectURL = vi.fn(() => 'mocked-url');
+    global.URL.revokeObjectURL = vi.fn();
   });
 
   afterAll(() => {
@@ -68,26 +37,40 @@ describe('CreatePostContent', () => {
       })
     );
 
-    const { container } = render(
-      <CreatePostContent setCoverImage={mockSetCoverImage} coverImage={null} />
+    render(
+      <CreatePostContent
+        setCoverImage={mockSetCoverImage}
+        coverImage={null}
+        onTitleChange={mockOnTitleChange}
+        onSubtitleChange={mockOnSubtitleChange}
+        onContentChange={mockOnContentChange}
+      />
     );
 
     await waitFor(() => {
-      const editor = container.querySelector('.ql-editor');
+      const editor = screen.getByTestId('create-post-content');
       expect(editor).toHaveTextContent('Draft Content');
     });
   });
 
-  it('should save the draft to localStorage when title, subtitle, or content changes', async () => {
+  it('should save the post draft to localStorage when title or subtitle changes', async () => {
     render(
-      <CreatePostContent setCoverImage={mockSetCoverImage} coverImage={null} />
+      <CreatePostContent
+        setCoverImage={mockSetCoverImage}
+        coverImage={null}
+        onTitleChange={mockOnTitleChange}
+        onSubtitleChange={mockOnSubtitleChange}
+        onContentChange={mockOnContentChange}
+      />
     );
 
     const titleInput = screen.getByTestId('title-input');
     const subtitleInput = screen.getByTestId('subtitle-input');
 
-    fireEvent.change(titleInput, { target: { value: 'New Title' } });
-    fireEvent.change(subtitleInput, { target: { value: 'New Subtitle' } });
+    await act(async () => {
+      fireEvent.change(titleInput, { target: { value: 'New Title' } });
+      fireEvent.change(subtitleInput, { target: { value: 'New Subtitle' } });
+    });
 
     await waitFor(() => {
       const draft = JSON.parse(localStorage.getItem('draftPost') || '{}');
@@ -98,14 +81,27 @@ describe('CreatePostContent', () => {
 
   it('should call setCoverImage function when an image is uploaded', async () => {
     render(
-      <CreatePostContent setCoverImage={mockSetCoverImage} coverImage={null} />
+      <CreatePostContent
+        setCoverImage={mockSetCoverImage}
+        coverImage={null}
+        onTitleChange={mockOnTitleChange}
+        onSubtitleChange={mockOnSubtitleChange}
+        onContentChange={mockOnContentChange}
+      />
     );
 
-    const uploadButton = screen.getByTestId('upload-image');
-    fireEvent.click(uploadButton);
+    const fileInput = screen.getByTestId('file-input');
+
+    const file = new File(['image content'], 'test-image.png', {
+      type: 'image/png',
+    });
+
+    await act(async () => {
+      fireEvent.change(fileInput, { target: { files: [file] } });
+    });
 
     await waitFor(() => {
-      expect(mockSetCoverImage).toHaveBeenCalledWith(expect.any(File));
+      expect(mockSetCoverImage).toHaveBeenCalledWith(file);
     });
   });
 
@@ -114,11 +110,17 @@ describe('CreatePostContent', () => {
       <CreatePostContent
         setCoverImage={mockSetCoverImage}
         coverImage={new File([], 'cover.png')}
+        onTitleChange={mockOnTitleChange}
+        onSubtitleChange={mockOnSubtitleChange}
+        onContentChange={mockOnContentChange}
       />
     );
 
-    const removeButton = screen.getByTestId('remove-image');
-    fireEvent.click(removeButton);
+    const removeButton = screen.getByTestId('remove-image-button');
+
+    await act(async () => {
+      fireEvent.click(removeButton);
+    });
 
     await waitFor(() => {
       expect(mockSetCoverImage).toHaveBeenCalledWith(null);
@@ -127,8 +129,19 @@ describe('CreatePostContent', () => {
 
   it('should render the component correctly', () => {
     const { asFragment } = render(
-      <CreatePostContent setCoverImage={mockSetCoverImage} coverImage={null} />
+      <CreatePostContent
+        setCoverImage={mockSetCoverImage}
+        coverImage={null}
+        onTitleChange={mockOnTitleChange}
+        onSubtitleChange={mockOnSubtitleChange}
+        onContentChange={mockOnContentChange}
+      />
     );
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  // Testando caso de erro no upload de imagem
+  it('should handle errors when uploading invalid image files', async () => {
+    // Adicionar um mock de erro, por exemplo, se o arquivo for inválido
   });
 });

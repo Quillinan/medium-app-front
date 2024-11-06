@@ -3,16 +3,22 @@
 exports[`CreatePostContent > should render the component correctly 1`] = `
 <DocumentFragment>
   <div
-    class="flex flex-col h-full p-4 space-y-4 w-1/2"
+    class="flex flex-col h-full p-4 space-y-4 w-1/2 mt-6"
     data-testid="create-post-content"
   >
     <input
+      class="mb-2 border rounded p-2"
       data-testid="title-input"
       placeholder="Título"
+      type="text"
+      value=""
     />
     <input
+      class="mb-2 border rounded p-2"
       data-testid="subtitle-input"
       placeholder="Subtítulo"
+      type="text"
+      value=""
     />
     <div
       class="quill "
@@ -430,12 +436,22 @@ exports[`CreatePostContent > should render the component correctly 1`] = `
         </div>
       </div>
     </div>
-    <div>
-      <button
-        data-testid="upload-image"
-      >
-        Upload
-      </button>
+    <div
+      class="border-dashed border-2 border-gray-400 p-4 mb-4 text-center cursor-pointer"
+      role="presentation"
+      tabindex="0"
+    >
+      <input
+        accept="image/*"
+        data-testid="file-input"
+        multiple=""
+        style="display: none;"
+        tabindex="-1"
+        type="file"
+      />
+      <p>
+        Arraste ou clique para adicionar uma imagem de capa
+      </p>
     </div>
   </div>
 </DocumentFragment>
