@@ -57,11 +57,17 @@ describe('PostsContent', () => {
     (getPosts as Mock).mockRejectedValue(new Error(errorMessage));
     (showLoading as Mock).mockRejectedValue(new Error(errorMessage));
 
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
     render(<PostsContent onPostSelect={mockOnPostSelect} />);
 
     expect(showLoading).toHaveBeenCalled();
     const error = await screen.findByText(errorMessage);
     expect(error).toBeInTheDocument();
+
+    consoleErrorSpy.mockRestore();
   });
 
   it('should display post data when fetching is successful', async () => {
@@ -77,10 +83,10 @@ describe('PostsContent', () => {
     await waitFor(() => {
       expect(screen.getByText('First Post')).toBeInTheDocument();
       expect(screen.getByText('Subtitle of First Post')).toBeInTheDocument();
-      expect(screen.getByText('Autor: Author One')).toBeInTheDocument();
+      expect(screen.getByText('Autor : Author One')).toBeInTheDocument();
       expect(screen.getByText('Second Post')).toBeInTheDocument();
       expect(screen.getByText('Subtitle of Second Post')).toBeInTheDocument();
-      expect(screen.getByText('Autor: Author Two')).toBeInTheDocument();
+      expect(screen.getByText('Autor : Author Two')).toBeInTheDocument();
     });
   });
 
@@ -107,11 +113,12 @@ describe('PostsContent', () => {
     });
   });
 
-  it('should match snapshot', () => {
-    const { asFragment } = render(
-      <PostsContent onPostSelect={mockOnPostSelect} />
-    );
-
-    expect(asFragment()).toMatchSnapshot();
+  it('should match snapshot', async () => {
+    await act(async () => {
+      const { asFragment } = render(
+        <PostsContent onPostSelect={mockOnPostSelect} />
+      );
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 });

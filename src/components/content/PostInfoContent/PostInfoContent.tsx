@@ -27,8 +27,6 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
       if (response) {
         setIsEditing(false);
         window.location.reload();
-      } else {
-        console.log('Resposta vazia ou erro na atualização do post');
       }
     } catch (error) {
       console.error('Erro ao atualizar o post:', error);

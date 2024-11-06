@@ -53,10 +53,16 @@ describe('API Utility Functions', () => {
       (axios.get as Mock).mockRejectedValueOnce(mockError);
       (handleError as Mock).mockReturnValue(errorResponseMock);
 
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
       const result = await getTotvs(url);
 
       expect(result).toEqual(errorResponseMock);
       expect(handleError).toHaveBeenCalledWith(mockError);
+
+      consoleErrorSpy.mockRestore();
     });
 
     it('should return data when API call is successful', async () => {

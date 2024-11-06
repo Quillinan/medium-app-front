@@ -38,6 +38,10 @@ describe('BirthdayContent', () => {
     (getMonthlyBirthdays as Mock).mockRejectedValue(new Error(errorMessage));
     (showLoading as Mock).mockRejectedValue(new Error(errorMessage));
 
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
     await act(async () => {
       render(<BirthdayContent />);
     });
@@ -46,6 +50,8 @@ describe('BirthdayContent', () => {
 
     const error = await screen.findByText('Erro ao carregar os dados da API');
     expect(error).toBeInTheDocument();
+
+    consoleErrorSpy.mockRestore();
   });
 
   it('should display birthday data when fetching is successful', async () => {

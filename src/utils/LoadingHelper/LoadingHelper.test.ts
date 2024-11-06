@@ -17,11 +17,17 @@ vi.mock('sweetalert2', async () => {
 
 describe('showLoading', () => {
   it('should close the modal and throw an error when the promise rejects', async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
     const mockPromise = Promise.reject(new Error('Test error'));
 
     await expect(showLoading(mockPromise)).rejects.toThrow('Test error');
 
     expect(Swal.close).toHaveBeenCalled();
+
+    consoleErrorSpy.mockRestore();
   });
 
   it('should display the loading modal and close it when the promise resolves', async () => {
