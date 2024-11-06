@@ -18,12 +18,11 @@ const SocialLoginButtons: React.FC = () => {
 
       if (token) {
         setAuth(token, userId, username);
-        console.log('Autenticado com sucesso', response);
       } else {
         console.error('Falha ao obter o token de autenticação');
       }
     } catch (error) {
-      console.error('Erro de autenticação:', error);
+      console.error('Erro na autenticação');
     }
   };
 
