@@ -15,6 +15,9 @@ interface CreatePostContentProps {
     coverImageUrl?: string;
   };
   isEditing?: boolean;
+  onTitleChange: (newTitle: string) => void; // Adicionado
+  onSubtitleChange: (newSubtitle: string) => void; // Adicionado
+  onContentChange: (newContent: string) => void; // Adicionado
 }
 
 const CreatePostContent: React.FC<CreatePostContentProps> = ({
@@ -22,6 +25,9 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
   coverImage,
   initialPostData,
   isEditing = false,
+  onTitleChange,
+  onSubtitleChange,
+  onContentChange,
 }) => {
   const [title, setTitle] = useState(initialPostData?.title || '');
   const [subtitle, setSubtitle] = useState(initialPostData?.subtitle || '');
@@ -67,9 +73,28 @@ const CreatePostContent: React.FC<CreatePostContentProps> = ({
       data-testid='create-post-content'
       className='flex flex-col h-full p-4 space-y-4 w-1/2 mt-6'
     >
-      <TitleInput title={title} onTitleChange={setTitle} />
-      <SubtitleInput subtitle={subtitle} onSubtitleChange={setSubtitle} />
-      <ReactQuill ref={quillRef} value={content} onChange={setContent} />
+      <TitleInput
+        title={title}
+        onTitleChange={newTitle => {
+          setTitle(newTitle);
+          onTitleChange(newTitle); // Chama a função passada por prop
+        }}
+      />
+      <SubtitleInput
+        subtitle={subtitle}
+        onSubtitleChange={newSubtitle => {
+          setSubtitle(newSubtitle);
+          onSubtitleChange(newSubtitle); // Chama a função passada por prop
+        }}
+      />
+      <ReactQuill
+        ref={quillRef}
+        value={content}
+        onChange={newContent => {
+          setContent(newContent);
+          onContentChange(newContent); // Chama a função passada por prop
+        }}
+      />
       <ImageDropzone
         coverImage={coverImage}
         initialCoverImageUrl={initialCoverImageUrl}

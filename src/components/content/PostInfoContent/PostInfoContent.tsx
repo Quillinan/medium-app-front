@@ -21,12 +21,14 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
   });
 
   const handleSave = async () => {
-    console.log('Salvei!');
     try {
       const response = await editPost(postData, String(post.id));
+
       if (response) {
-        console.log('Post atualizado com sucesso:', response);
         setIsEditing(false);
+        window.location.reload();
+      } else {
+        console.log('Resposta vazia ou erro na atualização do post');
       }
     } catch (error) {
       console.error('Erro ao atualizar o post:', error);
@@ -57,6 +59,15 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
             coverImageUrl: post.coverImageUrl,
           }}
           isEditing={true}
+          onTitleChange={newTitle =>
+            setPostData(prevData => ({ ...prevData, title: newTitle }))
+          }
+          onSubtitleChange={newSubtitle =>
+            setPostData(prevData => ({ ...prevData, subtitle: newSubtitle }))
+          }
+          onContentChange={newContent =>
+            setPostData(prevData => ({ ...prevData, content: newContent }))
+          }
         />
       ) : (
         <div className='flex flex-col h-full p-4 space-y-4 w-1/3 mt-6'>

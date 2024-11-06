@@ -1,8 +1,9 @@
-import BirthdayContent from '../BirthdayContent/BirthdayContent';
-import CreatePostContent from '../CreatePostContent/CreatePostContent';
-import PostsContent from '../PostsContent/PostsContent';
-import PostInfoContent from '../PostInfoContent/PostInfoContent';
 import { Post } from '@utils/Types/Types';
+import { useMemo, useState } from 'react';
+import PostInfoContent from '../PostInfoContent/PostInfoContent';
+import CreatePostContent from '../CreatePostContent/CreatePostContent';
+import BirthdayContent from '../BirthdayContent/BirthdayContent';
+import PostsContent from '../PostsContent/PostsContent';
 
 interface MainContentProps {
   currentTab: string;
@@ -19,6 +20,14 @@ const MainContent: React.FC<MainContentProps> = ({
   selectedPost,
   setSelectedPost,
 }) => {
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const coverImageUrl = useMemo(() => {
+    return coverImage ? URL.createObjectURL(coverImage) : undefined;
+  }, [coverImage]);
+
   const renderContent = () => {
     if (selectedPost) {
       return <PostInfoContent post={selectedPost} />;
@@ -30,6 +39,16 @@ const MainContent: React.FC<MainContentProps> = ({
           <CreatePostContent
             setCoverImage={setCoverImage}
             coverImage={coverImage}
+            initialPostData={{
+              title,
+              subtitle,
+              content,
+              coverImageUrl,
+            }}
+            isEditing={false}
+            onTitleChange={setTitle}
+            onSubtitleChange={setSubtitle}
+            onContentChange={setContent}
           />
         );
       case 'Aniversários':
