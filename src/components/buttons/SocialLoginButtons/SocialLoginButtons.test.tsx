@@ -30,6 +30,20 @@ describe('SocialLoginButtons', () => {
     });
   });
 
+  it('should handle login errors', async () => {
+    const error = new Error('Erro de autenticação');
+    mockLoginPopup.mockRejectedValueOnce(error);
+
+    render(<SocialLoginButtons />);
+
+    const microsoftButton = screen.getByRole('button', { name: /Microsoft/i });
+    fireEvent.click(microsoftButton);
+
+    expect(mockLoginPopup).toHaveBeenCalled();
+
+    expect(mockSetAuth).not.toHaveBeenCalled();
+  });
+
   it('should render the Microsoft login button', () => {
     render(<SocialLoginButtons />);
 
@@ -60,20 +74,6 @@ describe('SocialLoginButtons', () => {
       'mock-userId',
       'mock-username'
     );
-  });
-
-  it('should handle login errors', async () => {
-    const error = new Error('Erro de autenticação');
-    mockLoginPopup.mockRejectedValueOnce(error);
-
-    render(<SocialLoginButtons />);
-
-    const microsoftButton = screen.getByRole('button', { name: /Microsoft/i });
-    fireEvent.click(microsoftButton);
-
-    expect(mockLoginPopup).toHaveBeenCalled();
-
-    expect(mockSetAuth).not.toHaveBeenCalled();
   });
 
   it('should match snapshot', () => {
