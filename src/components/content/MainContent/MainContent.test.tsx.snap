@@ -7,7 +7,7 @@ exports[`MainContent > should match snapshot for "UnknownTab" tab 1`] = `
     data-testid="main-content"
   >
     <div
-      class="flex items-center justify-center h-full mt-4"
+      class="flex items-center justify-center h-full mt-9"
       data-testid="posts-content"
     >
       <div
