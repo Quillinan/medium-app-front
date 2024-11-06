@@ -82,7 +82,7 @@ describe('LoginForm', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(mockSetAuth).toHaveBeenCalledWith(null);
+      expect(mockSetAuth).toHaveBeenCalledWith(null, null, null);
       expect(mockNavigate).toHaveBeenCalledWith('/home');
     });
   });

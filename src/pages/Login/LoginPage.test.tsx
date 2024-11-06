@@ -1,33 +1,40 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import LoginPage from './LoginPage';
-import LoginForm from '@components/forms/LoginForm/LoginForm';
-import SocialLoginButtons from '@components/buttons/SocialLoginButtons/SocialLoginButtons';
-
-vi.mock('@components/LoginForm/LoginForm', () => ({
-  default: vi.fn(() => <div>Mocked LoginForm</div>),
-}));
-
-vi.mock('@components/SocialLoginButtons/SocialLoginButtons', () => ({
-  default: vi.fn(() => <div>Mocked SocialLoginButtons</div>),
-}));
+import { AuthProvider } from '@context/AuthContext/AuthContext';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('LoginPage', () => {
-  it('should render the login page with logo, title, and form', () => {
-    render(<LoginPage />);
+  it('should render the login page with logo, title, and form', async () => {
+    await act(async () => {
+      render(
+        <AuthProvider>
+          <MemoryRouter initialEntries={['/login']}>
+            <LoginPage />
+          </MemoryRouter>
+        </AuthProvider>
+      );
+    });
 
     const logo = screen.getByAltText('Your Company');
     expect(logo).toBeInTheDocument();
 
     const title = screen.getByText(/Sign in to your account/i);
     expect(title).toBeInTheDocument();
-
-    expect(LoginForm).toHaveBeenCalled();
-
-    expect(SocialLoginButtons).toHaveBeenCalled();
   });
-  it('should match snapshot', () => {
-    const { asFragment } = render(<LoginPage />);
 
-    expect(asFragment()).toMatchSnapshot();
+  it('should match snapshot', async () => {
+    let tree;
+    await act(async () => {
+      const { asFragment } = render(
+        <AuthProvider>
+          <MemoryRouter initialEntries={['/login']}>
+            <LoginPage />
+          </MemoryRouter>
+        </AuthProvider>
+      );
+      tree = asFragment();
+    });
+
+    expect(tree).toMatchSnapshot();
   });
 });

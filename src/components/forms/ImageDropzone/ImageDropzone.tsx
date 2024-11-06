@@ -45,7 +45,7 @@ const ImageDropzone: React.FC<ImageDropzoneProps> = ({
       {...getRootProps()}
       className='border-dashed border-2 border-gray-400 p-4 mb-4 text-center cursor-pointer'
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} data-testid='file-input' />
       <p>
         {coverImage
           ? 'Clique para alterar a imagem de capa'
@@ -53,8 +53,14 @@ const ImageDropzone: React.FC<ImageDropzoneProps> = ({
       </p>
       {imageUrl && (
         <div className='relative mb-4'>
-          <img src={imageUrl} alt='Capa do post' className='w-full h-auto' />
+          <img
+            data-testid='upload-image'
+            src={imageUrl}
+            alt='Capa do post'
+            className='w-full h-auto'
+          />
           <button
+            data-testid='remove-image-button'
             onClick={e => {
               e.stopPropagation();
               onImageRemove();

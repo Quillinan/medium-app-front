@@ -4,7 +4,7 @@ import { getPosts } from './GetPosts';
 
 vi.mock('@services/Api/Api', () => ({
   apiUrl: 'https://api.mock.com/',
-  get: vi.fn(),
+  getApi: vi.fn(),
 }));
 
 describe('getPosts', () => {
