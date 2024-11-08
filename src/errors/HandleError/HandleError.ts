@@ -12,63 +12,23 @@ const handleError = (error: AxiosError): ErrorResponse => {
   };
 
   if (error.response) {
-    switch (error.response.status) {
-      case 401:
-        Swal.fire({
-          title: 'Não autorizado',
-          text: 'Chave da API inválida.',
-          icon: 'error',
-        });
-        errorResponse = {
-          code: '401',
-          message: 'Não autorizado. Chave da API inválida.',
-          detailedMessage: error.message,
-          helpUrl: '',
-          details: null,
-        };
-        break;
-      case 404:
-        Swal.fire({
-          title: 'Não encontrado',
-          text: 'Dado não existe ou não foi encontrado.',
-          icon: 'error',
-        });
-        errorResponse = {
-          code: '404',
-          message: 'Dado não encontrado.',
-          detailedMessage: error.message,
-          helpUrl: '',
-          details: null,
-        };
-        break;
-      case 429:
-        Swal.fire({
-          title: 'Muitas chamadas',
-          text: 'Muitas chamadas para a API. Tente novamente mais tarde.',
-          icon: 'warning',
-        });
-        errorResponse = {
-          code: '429',
-          message: 'Muitas chamadas para a API.',
-          detailedMessage: error.message,
-          helpUrl: '',
-          details: null,
-        };
-        break;
-      default:
-        Swal.fire({
-          title: 'Erro',
-          text: 'Erro na requisição da API.',
-          icon: 'error',
-        });
-        errorResponse = {
-          code: error.response.status.toString(),
-          message: 'Erro na requisição da API.',
-          detailedMessage: error.message,
-          helpUrl: '',
-          details: null,
-        };
-    }
+    const { status, data } = error.response;
+
+    const errorData = data as { message?: string; details?: string };
+
+    Swal.fire({
+      title: errorData.message || 'Erro',
+      text: errorData.details || 'Erro na requisição da API.',
+      icon: 'error',
+    });
+
+    errorResponse = {
+      code: status.toString(),
+      message: errorData.message || 'Erro na requisição da API.',
+      detailedMessage: error.message,
+      helpUrl: '',
+      details: errorData.details ?? null,
+    };
   } else {
     Swal.fire({
       title: 'Erro',

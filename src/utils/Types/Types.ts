@@ -15,7 +15,7 @@ export interface ErrorResponse {
   message: string;
   detailedMessage: string;
   helpUrl: string;
-  details: null;
+  details: string | null;
 }
 
 export interface Birthday {
