@@ -37,6 +37,8 @@ describe('handleError', () => {
 
     expect(result.code).toBe('500');
     expect(result.message).toBe('Erro na requisição da API.');
+    expect(result.detailedMessage).toBe(mockError.message);
+    expect(result.details).toBeNull();
     expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Erro',
       text: 'Erro na requisição da API.',
@@ -46,11 +48,17 @@ describe('handleError', () => {
 
   it('should handle 401 error', () => {
     mockError.response!.status = 401;
+    mockError.response!.data = {
+      message: 'Não autorizado',
+      details: 'Chave da API inválida.',
+    };
 
     const result: ErrorResponse = handleError(mockError as AxiosError);
 
     expect(result.code).toBe('401');
-    expect(result.message).toBe('Não autorizado. Chave da API inválida.');
+    expect(result.message).toBe('Não autorizado');
+    expect(result.detailedMessage).toBe(mockError.message);
+    expect(result.details).toBe('Chave da API inválida.');
     expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Não autorizado',
       text: 'Chave da API inválida.',
@@ -60,11 +68,17 @@ describe('handleError', () => {
 
   it('should handle 404 error', () => {
     mockError.response!.status = 404;
+    mockError.response!.data = {
+      message: 'Não encontrado',
+      details: 'Dado não existe ou não foi encontrado.',
+    };
 
     const result: ErrorResponse = handleError(mockError as AxiosError);
 
     expect(result.code).toBe('404');
-    expect(result.message).toBe('Dado não encontrado.');
+    expect(result.message).toBe('Não encontrado');
+    expect(result.detailedMessage).toBe(mockError.message);
+    expect(result.details).toBe('Dado não existe ou não foi encontrado.');
     expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Não encontrado',
       text: 'Dado não existe ou não foi encontrado.',
@@ -72,13 +86,21 @@ describe('handleError', () => {
     });
   });
 
-  it('should handle 429 error', () => {
+  it('should handle 429 error with warning icon', () => {
     mockError.response!.status = 429;
+    mockError.response!.data = {
+      message: 'Muitas chamadas',
+      details: 'Muitas chamadas para a API. Tente novamente mais tarde.',
+    };
 
     const result: ErrorResponse = handleError(mockError as AxiosError);
 
     expect(result.code).toBe('429');
-    expect(result.message).toBe('Muitas chamadas para a API.');
+    expect(result.message).toBe('Muitas chamadas');
+    expect(result.detailedMessage).toBe(mockError.message);
+    expect(result.details).toBe(
+      'Muitas chamadas para a API. Tente novamente mais tarde.'
+    );
     expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Muitas chamadas',
       text: 'Muitas chamadas para a API. Tente novamente mais tarde.',
@@ -95,6 +117,8 @@ describe('handleError', () => {
 
     expect(result.code).toBe('UNKNOWN_ERROR');
     expect(result.message).toBe('Erro na requisição da API.');
+    expect(result.detailedMessage).toBe('');
+    expect(result.details).toBeNull();
     expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Erro',
       text: 'Erro na requisição da API.',

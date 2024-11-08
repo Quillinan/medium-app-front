@@ -13,13 +13,14 @@ const handleError = (error: AxiosError): ErrorResponse => {
 
   if (error.response) {
     const { status, data } = error.response;
-
     const errorData = data as { message?: string; details?: string };
+
+    const iconType = status === 429 ? 'warning' : 'error';
 
     Swal.fire({
       title: errorData.message || 'Erro',
       text: errorData.details || 'Erro na requisição da API.',
-      icon: 'error',
+      icon: iconType,
     });
 
     errorResponse = {
