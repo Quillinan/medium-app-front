@@ -31,7 +31,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
           icon: 'success',
         }).then(() => {
           onDeleteSuccess();
-          window.location.reload();
         });
       } else {
         console.error('Erro ao excluir o post:', result);
