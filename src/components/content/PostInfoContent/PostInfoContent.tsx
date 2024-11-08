@@ -19,6 +19,7 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
     content: post.content,
     coverImage: null,
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSave = async () => {
     try {
@@ -30,6 +31,7 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
       }
     } catch (error) {
       console.error('Erro ao atualizar o post:', error);
+      setErrorMessage('Erro ao atualizar o post: ' + error);
     }
   };
 
@@ -42,6 +44,11 @@ const PostInfoContent: React.FC<PostInfoContentProps> = ({ post }) => {
           onSave={handleSave}
           postId={String(post.id)}
         />
+      )}
+
+      {/* Exibe a mensagem de erro, se houver */}
+      {errorMessage && (
+        <div className='error-message text-red-500 mt-4'>{errorMessage}</div>
       )}
 
       {isEditing ? (
