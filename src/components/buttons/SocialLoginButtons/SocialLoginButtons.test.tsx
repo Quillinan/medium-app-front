@@ -16,6 +16,14 @@ describe('SocialLoginButtons', () => {
   const mockLoginPopup = vi.fn();
   const mockSetAuth = vi.fn();
 
+  beforeAll(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   beforeEach(() => {
     vi.clearAllMocks();
 
