@@ -16,6 +16,7 @@ describe('CreatePostContent', () => {
   beforeAll(() => {
     global.URL.createObjectURL = vi.fn(() => 'mocked-url');
     global.URL.revokeObjectURL = vi.fn();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterAll(() => {
@@ -50,6 +51,10 @@ describe('CreatePostContent', () => {
     await waitFor(() => {
       const editor = screen.getByTestId('create-post-content');
       expect(editor).toHaveTextContent('Draft Content');
+      expect(screen.getByTestId('title-input')).toHaveValue('Draft Title');
+      expect(screen.getByTestId('subtitle-input')).toHaveValue(
+        'Draft Subtitle'
+      );
     });
   });
 
@@ -76,6 +81,8 @@ describe('CreatePostContent', () => {
       const draft = JSON.parse(localStorage.getItem('draftPost') || '{}');
       expect(draft.title).toBe('New Title');
       expect(draft.subtitle).toBe('New Subtitle');
+      expect(mockOnTitleChange).toHaveBeenCalledWith('New Title');
+      expect(mockOnSubtitleChange).toHaveBeenCalledWith('New Subtitle');
     });
   });
 
@@ -138,10 +145,5 @@ describe('CreatePostContent', () => {
       />
     );
     expect(asFragment()).toMatchSnapshot();
-  });
-
-  // Testando caso de erro no upload de imagem
-  it('should handle errors when uploading invalid image files', async () => {
-    // Adicionar um mock de erro, por exemplo, se o arquivo for inválido
   });
 });
