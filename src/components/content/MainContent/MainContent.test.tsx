@@ -1,7 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import MainContent from './MainContent';
+import { Mock } from 'vitest';
 
 describe('MainContent', () => {
+  beforeAll(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    (console.error as Mock).mockRestore();
+  });
+
   it('should render PostsContent by default when an unknown tab is provided', () => {
     render(
       <MainContent

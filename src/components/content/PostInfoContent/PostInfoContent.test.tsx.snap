@@ -38,7 +38,7 @@ exports[`PostInfoContent Component > should match snapshot 1`] = `
         class="mt-4 text-gray-500"
         style="font-size: 16px;"
       >
-        Autor: Test Author | Criado em: 08/11/2024
+        Autor: Test Author | Criado em: 10/11/2024
       </p>
       <div
         class="mt-4 w-full"

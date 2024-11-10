@@ -13,6 +13,14 @@ describe('HomePage', () => {
   const mockRemoveAuth = vi.fn();
   const mockNavigate = vi.fn();
 
+  beforeAll(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    (console.error as Mock).mockRestore();
+  });
+
   beforeEach(() => {
     (useAuth as Mock).mockReturnValue({ removeAuth: mockRemoveAuth });
     (useNavigate as Mock).mockReturnValue(mockNavigate);
