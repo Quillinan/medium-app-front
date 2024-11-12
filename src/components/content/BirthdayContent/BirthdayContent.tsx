@@ -38,7 +38,7 @@ const BirthdayContent: React.FC = () => {
   return (
     <div
       data-testid='birthday-content'
-      className='flex items-center justify-center h-full'
+      className='flex items-center justify-center h-full mt-5 mb-5'
     >
       {error ? <p>{error}</p> : <TableBirthday data={data} />}
     </div>

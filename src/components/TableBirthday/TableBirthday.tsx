@@ -1,46 +1,39 @@
+import React from 'react';
 import { TableBirthdayProps } from '@utils/Types/Types';
 
 const TableBirthday: React.FC<TableBirthdayProps> = ({ data }) => {
   return (
-    <div className='overflow-x-auto'>
-      <table className='min-w-full bg-white border border-gray-400 rounded-lg shadow-md'>
-        <thead>
-          <tr>
-            <th className='px-4 py-2 border-b-2 border-gray-400 bg-gray-200 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider'>
-              Nome
-            </th>
-            <th className='px-4 py-2 border-b-2 border-gray-400 bg-gray-200 text-center text-sm font-semibold text-gray-700 uppercase tracking-wider'>
-              Dia
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.length > 0 ? (
-            data.map((person, index) => (
-              <tr key={index} className='border-b border-gray-300'>
-                <td
-                  data-testid={`name-${person.NOME}`}
-                  className='px-4 py-2 text-sm text-gray-800'
-                >
-                  {person.NOME}
-                </td>
-                <td className='px-4 py-2 text-sm text-gray-800 text-center'>
-                  {person.DTNASCIMENTO}
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td
-                colSpan={2}
-                className='px-4 py-2 text-center text-sm text-gray-500'
-              >
-                Nenhum aniversariante encontrado.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+      {data.length > 0 ? (
+        data.map((person, index) => (
+          <div
+            key={index}
+            className='bg-white border border-gray-400 rounded-lg shadow-md p-4 flex items-center space-x-4'
+          >
+            {/* Renderizar a imagem se ela existir */}
+            {person.IMAGEM && (
+              <img
+                src={`data:image/jpeg;base64,${person.IMAGEM}`}
+                alt={`Foto de ${person.NOME}`}
+                className='w-16 h-16 rounded-full object-cover'
+              />
+            )}
+            <div>
+              <h3 className='text-lg font-semibold text-gray-800'>
+                {person.NOME}
+              </h3>
+              <p className='text-sm text-gray-600'>Setor: {person.DESCRICAO}</p>
+              <p className='text-sm text-gray-600'>
+                Aniversário: {person.DTNASCIMENTO}
+              </p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className='text-center text-sm text-gray-500 col-span-full'>
+          Nenhum aniversariante encontrado.
+        </p>
+      )}
     </div>
   );
 };

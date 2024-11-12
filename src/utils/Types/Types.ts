@@ -21,10 +21,17 @@ export interface ErrorResponse {
 export interface Birthday {
   NOME: string;
   DTNASCIMENTO: number;
+  DESCRICAO: string;
+  IMAGEM: string;
 }
 
 export interface TableBirthdayProps {
-  data: { NOME: string; DTNASCIMENTO: number }[];
+  data: {
+    NOME: string;
+    DTNASCIMENTO: number;
+    DESCRICAO: string;
+    IMAGEM: string;
+  }[];
 }
 
 export interface Post {
