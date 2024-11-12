@@ -38,8 +38,8 @@ describe('getMonthlyBirthdays', () => {
 
   it('should return birthday data when API call is successful', async () => {
     const mockBirthdays: Birthday[] = [
-      { NOME: 'Alice', DTNASCIMENTO: 1 },
-      { NOME: 'Bob', DTNASCIMENTO: 2 },
+      { NOME: 'João', DTNASCIMENTO: 1, DESCRICAO: 'Financeiro', IMAGEM: '' },
+      { NOME: 'Maria', DTNASCIMENTO: 17, DESCRICAO: 'RH', IMAGEM: '' },
     ];
 
     vi.mocked(getTotvs).mockResolvedValue(mockBirthdays);
