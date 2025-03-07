@@ -21,7 +21,7 @@ exports[`NavBar > should match snapshot 1`] = `
             <img
               alt="Your Company"
               class="h-8 w-8"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
             />
           </div>
           <div

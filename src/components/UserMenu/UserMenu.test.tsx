@@ -23,26 +23,49 @@ describe('UserMenu', () => {
     (useAuth as Mock).mockReturnValue({
       removeAuth: mockRemoveAuth,
     });
+
+    sessionStorage.clear();
   });
 
-  it('should render UserMenu with IconButton', () => {
+  it('should render UserMenu with user name if name is stored in sessionStorage', () => {
+    sessionStorage.setItem('name', 'João');
+
     render(<UserMenu />);
 
-    const iconButton = screen.getByAltText('User');
-    expect(iconButton).toBeInTheDocument();
+    const userNameElement = screen.getByText('João');
+    expect(userNameElement).toBeInTheDocument();
+
+    const logoutButton = screen.getByRole('button');
+    expect(logoutButton).toBeInTheDocument();
   });
 
-  it('should call removeAuth on successful logout', async () => {
+  it('should render UserMenu with default text if no name is stored', () => {
     render(<UserMenu />);
 
-    const iconButton = screen.getByAltText('User');
-    fireEvent.click(iconButton);
+    const defaultTextElement = screen.getByText('Usuário');
+    expect(defaultTextElement).toBeInTheDocument();
 
-    expect(mockRemoveAuth).toHaveBeenCalled();
+    const logoutButton = screen.getByRole('button');
+    expect(logoutButton).toBeInTheDocument();
+  });
+
+  it('should call removeAuth on successful logout', () => {
+    sessionStorage.setItem('name', 'João');
+
+    render(<UserMenu />);
+
+    const logoutButton = screen.getByRole('button');
+
+    fireEvent.click(logoutButton);
+
+    expect(mockRemoveAuth).toHaveBeenCalledTimes(1);
+
     expect(mockNavigate).toHaveBeenCalledWith('/login');
   });
 
   it('should match snapshot', () => {
+    render(<UserMenu />);
+
     const { asFragment } = render(<UserMenu />);
     expect(asFragment()).toMatchSnapshot();
   });

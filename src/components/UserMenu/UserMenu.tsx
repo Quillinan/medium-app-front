@@ -10,7 +10,6 @@ const UserMenu: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    // Obtém o nome do usuário do sessionStorage
     const storedName = sessionStorage.getItem('name');
     setUserName(storedName);
   }, []);
