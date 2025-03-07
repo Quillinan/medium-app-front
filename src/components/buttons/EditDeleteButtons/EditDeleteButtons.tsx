@@ -38,7 +38,12 @@ const EditDeleteButtons: React.FC<EditDeleteButtonsProps> = ({
           >
             Editar
           </button>
-          <DeleteButton postId={postId} onDeleteSuccess={() => {}} />
+          <DeleteButton
+            postId={postId}
+            onDeleteSuccess={() => {
+              window.location.reload();
+            }}
+          />
         </>
       )}
     </div>
