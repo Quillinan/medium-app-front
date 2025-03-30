@@ -6,8 +6,8 @@ Frontend desenvolvido com React, TypeScript, Vite e Tailwind CSS.
 
 Certifique-se de ter o Node.js e o Yarn instalados em sua máquina. Se ainda não tiver, você pode instalá-los a partir dos seguintes links:
 
-- Node.js
-- Yarn
+- [Node.js](https://nodejs.org/en/download)
+- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 
 ## Instalação:
 
